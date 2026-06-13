@@ -48,5 +48,12 @@ Tài liệu theo dõi tiến độ phát triển dự án Emora theo đúng quy 
 ---
 
 ## Các Sprint Tiếp theo (Phase sau)
-*   **Sprint 4: Yêu cầu Chăm sóc & Couple Widget** ✅ Completed (13/06/2026)
-*   **Sprint 5: Push Notifications & Beta Test** ⬜ Not Started
+*   **Phase 1: MVP Setup** | Trạng thái: ✅ Completed (Bypass Sprint 5)
+    *   **Sprint 5: Push Notifications & Beta Test** | Trạng thái: ⚠️ Pending (Bypassed)
+*   **Phase 2: Playful Venting (Chăm sóc vui vẻ)** | Trạng thái: ⬜ Not Started (Xem chi tiết tại [phase_2_proposal.md](file:///C:/Users/Admin/.gemini/antigravity-ide/brain/a8e0cbf7-826d-4f3a-a54a-ceacc24c715e/phase_2_proposal.md))
+    *   **Sprint 6: The Vent Room & Pillow Fight Interactions** | Trạng thái: ⬜ Not Started
+    *   **Sprint 7: Real-time WebSocket Messaging & Interactive Animations** | Trạng thái: ⬜ Not Started
+*   **Phase 3: Family Assistant (Trợ lý gia đình)** | Trạng thái: ⬜ Not Started
+    *   **Sprint 8: Baby Vaccination Tracker** | Trạng thái: ⬜ Not Started
+*   **Phase 4: Premium & Dynamic Themes** | Trạng thái: ⬜ Not Started
+    *   **Sprint 9: Dynamic Themes, custom stickers and Payment Integration** | Trạng thái: ⬜ Not Started
