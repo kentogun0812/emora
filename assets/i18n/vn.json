@@ -1,0 +1,71 @@
+{
+  "app_name": "Emora",
+  "slogan": "Thấu hiểu không cần lời nói",
+  "login": {
+    "welcome": "Chào mừng bạn đến với Emora",
+    "desc": "Kết nối và thấu hiểu đối phương thông qua những chạm tương tác thầm lặng.",
+    "sign_in_google": "Đăng nhập với Google",
+    "sign_in_apple": "Đăng nhập với Apple",
+    "error_failed": "Đăng nhập thất bại. Vui lòng thử lại!"
+  },
+  "pairing": {
+    "title": "Ghép đôi hai người",
+    "tab_my_code": "Mã của tôi",
+    "tab_input_code": "Nhập mã",
+    "desc_your_code": "Mã ghép đôi của bạn",
+    "desc_input_code": "Hoặc nhập mã của đối phương",
+    "input_placeholder": "Nhập 6 chữ số",
+    "share_btn": "Gửi lời mời nhanh",
+    "share_message": "Hãy tải ứng dụng Emora và nhập mã ghép đôi này nhé: {code} để kết nối cùng mình!",
+    "connect_btn": "Kết nối ngay",
+    "or_scan_qr": "Hoặc quét mã QR",
+    "error_invalid_code": "Mã ghép đôi không hợp lệ hoặc đã hết hạn!",
+    "error_self_code": "Không thể kết nối với mã của chính bạn!",
+    "success_connected": "Kết nối cặp đôi thành công!"
+  },
+  "common": {
+    "error_network": "Lỗi kết nối mạng. Vui lòng thử lại!",
+    "loading": "Đang tải...",
+    "save": "Lưu",
+    "cancel": "Hủy"
+  },
+  "mood": {
+    "title": "Hôm nay bạn thế nào?",
+    "Happy": "Vui vẻ",
+    "Calm": "Bình yên",
+    "Tired": "Mệt mỏi",
+    "Sad": "Buồn bã",
+    "Irritated": "Bực mình",
+    "NeedAffection": "Cần quan tâm",
+    "NeedSpace": "Cần yên tĩnh"
+  },
+  "nudge": {
+    "sent_success": "❤️ Đã gửi Rung động yêu thương!"
+  },
+  "calendar": {
+    "title": "Lịch chung",
+    "add_log": "Thêm ghi chép",
+    "period_start": "Bắt đầu kỳ kinh",
+    "period_end": "Kết thúc kỳ kinh",
+    "period_log": "Ghi nhận chu kỳ",
+    "save_period": "Lưu ngày chu kỳ",
+    "relation_journal": "Nhật ký quan hệ",
+    "relation_protected": "🛡️ Có bảo vệ (An toàn)",
+    "relation_unprotected": "⚠️ Không bảo vệ",
+    "notes_hint": "Ghi chú ngắn (tùy chọn)",
+    "save_journal": "Lưu nhật ký",
+    "success_save": "Đã lưu thành công!"
+  },
+  "settings": {
+    "title": "Cài đặt",
+    "cycle_privacy": "Riêng tư chu kỳ",
+    "share_full": "Chia sẻ đầy đủ",
+    "share_summary": "Chỉ chia sẻ trạng thái chung (PMS, Kỳ kinh)",
+    "share_none": "Không chia sẻ",
+    "cycle_length": "Độ dài chu kỳ (ngày)",
+    "period_length": "Số ngày hành kinh (ngày)",
+    "save_settings": "Lưu cài đặt",
+    "disconnect": "Hủy kết nối cặp đôi",
+    "days_together": "Thời gian bên nhau: {days} ngày"
+  }
+}

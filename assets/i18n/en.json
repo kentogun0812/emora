@@ -1,0 +1,71 @@
+{
+  "app_name": "Emora",
+  "slogan": "Understand without words",
+  "login": {
+    "welcome": "Welcome to Emora",
+    "desc": "Connect and understand your partner through simple silent interactions.",
+    "sign_in_google": "Sign in with Google",
+    "sign_in_apple": "Sign in with Apple",
+    "error_failed": "Login failed. Please try again!"
+  },
+  "pairing": {
+    "title": "Pair Your Device",
+    "tab_my_code": "My Code",
+    "tab_input_code": "Enter Code",
+    "desc_your_code": "Your pairing code",
+    "desc_input_code": "Or enter partner's code",
+    "input_placeholder": "Enter 6-digit code",
+    "share_btn": "Share Invite Link",
+    "share_message": "Download the Emora app and enter my pairing code: {code} to connect with me!",
+    "connect_btn": "Connect Now",
+    "or_scan_qr": "Or scan QR code",
+    "error_invalid_code": "Invalid or expired pairing code!",
+    "error_self_code": "You cannot connect with your own code!",
+    "success_connected": "Connected successfully!"
+  },
+  "common": {
+    "error_network": "Network connection error. Please try again!",
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "mood": {
+    "title": "How are you today?",
+    "Happy": "Happy",
+    "Calm": "Calm",
+    "Tired": "Tired",
+    "Sad": "Sad",
+    "Irritated": "Irritated",
+    "NeedAffection": "Need Affection",
+    "NeedSpace": "Need Space"
+  },
+  "nudge": {
+    "sent_success": "❤️ Sent Love Nudge!"
+  },
+  "calendar": {
+    "title": "Shared Calendar",
+    "add_log": "Add Entry",
+    "period_start": "Period Start",
+    "period_end": "Period End",
+    "period_log": "Log Period",
+    "save_period": "Save Period Dates",
+    "relation_journal": "Shared Journal",
+    "relation_protected": "🛡️ Protected",
+    "relation_unprotected": "⚠️ Unprotected",
+    "notes_hint": "Short notes (optional)",
+    "save_journal": "Save Journal",
+    "success_save": "Saved successfully!"
+  },
+  "settings": {
+    "title": "Settings",
+    "cycle_privacy": "Cycle Privacy",
+    "share_full": "Share Full Details",
+    "share_summary": "Share Summary Only (PMS, Period)",
+    "share_none": "Don't Share",
+    "cycle_length": "Cycle Length (days)",
+    "period_length": "Period Duration (days)",
+    "save_settings": "Save Settings",
+    "disconnect": "Disconnect Couple",
+    "days_together": "Days together: {days} days"
+  }
+}

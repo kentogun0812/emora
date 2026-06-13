@@ -1,0 +1,71 @@
+{
+  "app_name": "Emora",
+  "slogan": "言葉なしで理解し合う",
+  "login": {
+    "welcome": "エモラへようこそ",
+    "desc": "静かなタップと温かい繋がりを通じて、お互いをより深く理解しましょう。",
+    "sign_in_google": "Googleでサインイン",
+    "sign_in_apple": "Appleでサインイン",
+    "error_failed": "サインインに失敗しました。もう一度お試しください！"
+  },
+  "pairing": {
+    "title": "デバイスのペアリング",
+    "tab_my_code": "マイコード",
+    "tab_input_code": "コードを入力",
+    "desc_your_code": "あなたのペアリングコード",
+    "desc_input_code": "またはパートナーのコードを入力",
+    "input_placeholder": "6桁のコードを入力",
+    "share_btn": "招待を送信",
+    "share_message": "Emoraアプリをダウンロードし、私のペアリングコード {code} を入力して接続しましょう！",
+    "connect_btn": "今すぐペアリングする",
+    "or_scan_qr": "またはQRコードをスキャン",
+    "error_invalid_code": "無効なコードか、有効期限が切れています！",
+    "error_self_code": "自分自身のコードとは接続できません！",
+    "success_connected": "ペアリングが正常に完了しました！"
+  },
+  "common": {
+    "error_network": "ネットワークエラーが発生しました。もう一度お試しください！",
+    "loading": "読み込み中...",
+    "save": "保存",
+    "cancel": "キャンセル"
+  },
+  "mood": {
+    "title": "今日の気分はどうですか？",
+    "Happy": "嬉しい",
+    "Calm": "穏やか",
+    "Tired": "疲れた",
+    "Sad": "悲しい",
+    "Irritated": "イライラ",
+    "NeedAffection": "甘えたい",
+    "NeedSpace": "そっとしておいて"
+  },
+  "nudge": {
+    "sent_success": "❤️ ナッジを送信しました！"
+  },
+  "calendar": {
+    "title": "共有カレンダー",
+    "add_log": "記録を追加",
+    "period_start": "生理開始",
+    "period_end": "生理終了",
+    "period_log": "生理記録",
+    "save_period": "生理日を保存",
+    "relation_journal": "二人の日記",
+    "relation_protected": "🛡️ 避妊あり (安全)",
+    "relation_unprotected": "⚠️ 避妊なし",
+    "notes_hint": "メモ (任意)",
+    "save_journal": "日記を保存",
+    "success_save": "保存しました！"
+  },
+  "settings": {
+    "title": "設定",
+    "cycle_privacy": "生理周期の共有設定",
+    "share_full": "すべて共有する",
+    "share_summary": "概要のみ共有 (PMS、生理期)",
+    "share_none": "共有しない",
+    "cycle_length": "生理周期 (日)",
+    "period_length": "生理期間 (日)",
+    "save_settings": "設定を保存",
+    "disconnect": "ペアリング解除",
+    "days_together": "付き合ってから: {days}日"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "app_name": "Emora",
+  "slogan": "말 한마디 없이 이해하다",
+  "login": {
+    "welcome": "에모라에 오신 것을 환영합니다",
+    "desc": "말 없는 작은 터치와 교감으로 서로를 더 깊이 연결하고 이해해 보세요.",
+    "sign_in_google": "Google 계정으로 로그인",
+    "sign_in_apple": "Apple 계정으로 로그인",
+    "error_failed": "로그인에 실패했습니다. 다시 시도해 주세요!"
+  },
+  "pairing": {
+    "title": "기기 연결",
+    "tab_my_code": "내 코드",
+    "tab_input_code": "코드 입력",
+    "desc_your_code": "당신의 연결 코드",
+    "desc_input_code": "또는 파트너 코드 입력",
+    "input_placeholder": "6자리 코드 입력",
+    "share_btn": "초대 코드 보내기",
+    "share_message": "에모라(Emora) 앱을 다운로드하고 내 매칭 코드인 {code}를 입력하여 연결해 주세요!",
+    "connect_btn": "지금 연결하기",
+    "or_scan_qr": "또는 QR 코드 스캔",
+    "error_invalid_code": "유효하지 않거나 만료된 코드입니다!",
+    "error_self_code": "자신의 코드로 연결할 수 없습니다!",
+    "success_connected": "커플 연결에 성공했습니다!"
+  },
+  "common": {
+    "error_network": "네트워크 연결 오류입니다. 다시 시도해 주세요!",
+    "loading": "로딩 중...",
+    "save": "저장",
+    "cancel": "취소"
+  },
+  "mood": {
+    "title": "오늘 기분은 어떠신가요?",
+    "Happy": "기쁨",
+    "Calm": "평온함",
+    "Tired": "피곤함",
+    "Sad": "슬픔",
+    "Irritated": "짜증남",
+    "NeedAffection": "관심이 필요함",
+    "NeedSpace": "혼자만의 시간이 필요함"
+  },
+  "nudge": {
+    "sent_success": "❤️ 넛지를 보냈습니다!"
+  },
+  "calendar": {
+    "title": "공유 캘린더",
+    "add_log": "기록 추가",
+    "period_start": "생리 시작",
+    "period_end": "생리 종료",
+    "period_log": "주기 기록",
+    "save_period": "생리 기간 저장",
+    "relation_journal": "커플 다이어리",
+    "relation_protected": "🛡️ 피임 있음 (안전)",
+    "relation_unprotected": "⚠️ 피임 없음",
+    "notes_hint": "짧은 메모 (선택사항)",
+    "save_journal": "다이어리 저장",
+    "success_save": "성공적으로 저장되었습니다!"
+  },
+  "settings": {
+    "title": "설정",
+    "cycle_privacy": "생리 주기 공개범위",
+    "share_full": "전체 공유",
+    "share_summary": "요약만 공유 (PMS, 생리 상태)",
+    "share_none": "공유하지 않음",
+    "cycle_length": "생리 주기 (일)",
+    "period_length": "생리 기간 (일)",
+    "save_settings": "설정 저장",
+    "disconnect": "커플 연결 해제",
+    "days_together": "우리가 함께한 시간: {days}일"
+  }
+}
