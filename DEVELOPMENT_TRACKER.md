@@ -36,7 +36,17 @@ Tài liệu theo dõi tiến độ phát triển dự án Emora theo đúng quy 
 
 ---
 
+## Sprint 4: Yêu cầu Chăm sóc & Couple Widget (Tuần 4)
+
+| Tên tính năng (Feature Name) | Trạng thái (Status) | Ngày cập nhật (Updated At) | Ghi chú (Implementation Notes) |
+| :--- | :--- | :--- | :--- |
+| **Ngăn kéo Care Requests** | ✅ Completed | 13/06/2026 | Grid sheet chứa 6 mẫu yêu cầu chăm sóc hoạt họa hỗ trợ gửi nhanh bằng 1 chạm từ Hero Bubble. |
+| **Danh sách Yêu cầu Hoạt động** | ✅ Completed | 13/06/2026 | Hiển thị realtime các yêu cầu, cho phép Nhận việc (Accept), Hoàn thành (Complete) hoặc Hủy/Trả việc (Reset/Cancel). |
+| **Giả lập Couple Widget** | ✅ Completed | 13/06/2026 | Component Widget Preview hiển thị avatar đối phương, mood hiện tại và yêu cầu chăm sóc mới nhất trên Dashboard. |
+| **Đồng bộ hóa Realtime** | ✅ Completed | 13/06/2026 | Tích hợp realtime listener vào DashboardBloc, tự động cập nhật yêu cầu chăm sóc, hỗ trợ lọc tự động sau 24h và Mock Data bypass. |
+
+---
+
 ## Các Sprint Tiếp theo (Phase sau)
-*   **Sprint 3: Lịch chu kỳ & Nhật ký dùng chung** ✅ Completed (13/06/2026)
-*   **Sprint 4: Care Requests & Couple Widget** ⬜ Not Started
+*   **Sprint 4: Yêu cầu Chăm sóc & Couple Widget** ✅ Completed (13/06/2026)
 *   **Sprint 5: Push Notifications & Beta Test** ⬜ Not Started

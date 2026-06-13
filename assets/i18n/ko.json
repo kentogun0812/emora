@@ -67,5 +67,27 @@
     "save_settings": "설정 저장",
     "disconnect": "커플 연결 해제",
     "days_together": "우리가 함께한 시간: {days}일"
+  },
+  "care_requests": {
+    "title": "돌봄 요청",
+    "send_title": "돌봄 요청 보내기",
+    "bring_water": "☕ 물 좀 가져다줘",
+    "buy_food": "🍜 먹을 것 좀 사다줘",
+    "watch_kids": "👶 아이 좀 잠시 봐줘",
+    "clean_house": "🏠 집 청소 좀 도와줘",
+    "need_hug": "🤗 안아주세요",
+    "need_space": "🧘 나만의 시간이 필요해",
+    "status_pending": "대기 중...",
+    "status_accepted": "진행 중",
+    "status_completed": "완료됨",
+    "status_canceled": "취소됨",
+    "action_accept": "수락",
+    "action_complete": "완료",
+    "action_cancel": "요청 취소",
+    "action_reset": "수락 취소",
+    "success_sent": "돌봄 요청이 전송되었습니다!",
+    "no_active": "대기 중인 돌봄 요청이 없습니다.",
+    "sent_by_me": "내가 요청함",
+    "sent_by_partner": "상대방이 요청함"
   }
 }

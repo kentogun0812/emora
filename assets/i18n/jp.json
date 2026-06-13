@@ -67,5 +67,27 @@
     "save_settings": "設定を保存",
     "disconnect": "ペアリング解除",
     "days_together": "付き合ってから: {days}日"
+  },
+  "care_requests": {
+    "title": "おねだり・お手伝い",
+    "send_title": "おねだりを送る",
+    "bring_water": "☕ お水持ってきて",
+    "buy_food": "🍜 ご飯買ってきて",
+    "watch_kids": "👶 子どもを少し見てて",
+    "clean_house": "🏠 お部屋の掃除手伝って",
+    "need_hug": "🤗 ぎゅっとしてほしい",
+    "need_space": "🧘 そっとしておいて",
+    "status_pending": "待機中...",
+    "status_accepted": "対応中",
+    "status_completed": "完了",
+    "status_canceled": "キャンセル済み",
+    "action_accept": "引き受ける",
+    "action_complete": "完了する",
+    "action_cancel": "おねだり取消",
+    "action_reset": "引き受けキャンセル",
+    "success_sent": "おねだりを送信しました！",
+    "no_active": "現在待機中のおねだりはありません。",
+    "sent_by_me": "あなたのおねだり",
+    "sent_by_partner": "パートナーのおねだり"
   }
 }

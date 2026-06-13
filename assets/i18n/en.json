@@ -67,5 +67,27 @@
     "save_settings": "Save Settings",
     "disconnect": "Disconnect Couple",
     "days_together": "Days together: {days} days"
+  },
+  "care_requests": {
+    "title": "Care Requests",
+    "send_title": "Send Care Request",
+    "bring_water": "☕ Bring me water",
+    "buy_food": "🍜 Buy food",
+    "watch_kids": "👶 Watch kids",
+    "clean_house": "🏠 Clean house",
+    "need_hug": "🤗 Need a hug",
+    "need_space": "🧘 Need space",
+    "status_pending": "Waiting...",
+    "status_accepted": "In progress",
+    "status_completed": "Completed",
+    "status_canceled": "Canceled",
+    "action_accept": "Accept",
+    "action_complete": "Complete",
+    "action_cancel": "Cancel Request",
+    "action_reset": "Cancel Accept",
+    "success_sent": "Care request sent!",
+    "no_active": "No active care requests pending.",
+    "sent_by_me": "Requested by you",
+    "sent_by_partner": "Requested by partner"
   }
 }

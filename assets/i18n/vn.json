@@ -67,5 +67,27 @@
     "save_settings": "Lưu cài đặt",
     "disconnect": "Hủy kết nối cặp đôi",
     "days_together": "Thời gian bên nhau: {days} ngày"
+  },
+  "care_requests": {
+    "title": "Yêu cầu Chăm sóc",
+    "send_title": "Gửi yêu cầu chăm sóc",
+    "bring_water": "☕ Mang cho em ly nước",
+    "buy_food": "🍜 Mua đồ ăn giúp em",
+    "watch_kids": "👶 Trông con một chút nhé",
+    "clean_house": "🏠 Dọn nhà giúp em nha",
+    "need_hug": "🤗 Cần một cái ôm",
+    "need_space": "🧘 Cần không gian riêng",
+    "status_pending": "Đang đợi...",
+    "status_accepted": "Đang thực hiện",
+    "status_completed": "Đã hoàn thành",
+    "status_canceled": "Đã hủy",
+    "action_accept": "Nhận việc",
+    "action_complete": "Hoàn thành",
+    "action_cancel": "Hủy yêu cầu",
+    "action_reset": "Hủy nhận việc",
+    "success_sent": "Đã gửi yêu cầu chăm sóc!",
+    "no_active": "Không có yêu cầu nào đang chờ xử lý.",
+    "sent_by_me": "Bạn yêu cầu",
+    "sent_by_partner": "Đối phương yêu cầu"
   }
 }

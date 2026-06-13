@@ -37,3 +37,31 @@ class SendNudge extends DashboardEvent {
 class NudgeReceived extends DashboardEvent {
   const NudgeReceived();
 }
+
+class CreateCareRequest extends DashboardEvent {
+  final String templateId;
+
+  const CreateCareRequest(this.templateId);
+
+  @override
+  List<Object?> get props => [templateId];
+}
+
+class UpdateRequestStatus extends DashboardEvent {
+  final String requestId;
+  final String newStatus;
+
+  const UpdateRequestStatus({required this.requestId, required this.newStatus});
+
+  @override
+  List<Object?> get props => [requestId, newStatus];
+}
+
+class CareRequestsUpdated extends DashboardEvent {
+  final List<Map<String, dynamic>> requests;
+
+  const CareRequestsUpdated(this.requests);
+
+  @override
+  List<Object?> get props => [requests];
+}

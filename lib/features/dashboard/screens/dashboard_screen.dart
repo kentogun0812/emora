@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shake/shake.dart';
 import '../../../core/constants/colors.dart';
+import '../../../core/network/supabase_handler.dart';
 import '../../../core/utils/localization.dart';
 import '../../auth/bloc/auth_bloc.dart';
 import '../../auth/bloc/auth_event.dart';
@@ -11,6 +12,9 @@ import '../../auth/bloc/auth_state.dart';
 import '../../calendar/screens/calendar_tab.dart';
 import '../../settings/screens/settings_tab.dart';
 import '../bloc/dashboard_bloc.dart';
+import '../widgets/active_requests_list.dart';
+import '../widgets/care_request_sheet.dart';
+import '../widgets/couple_widget_card.dart';
 import '../widgets/floating_hearts.dart';
 import '../widgets/hero_bubble_painter.dart';
 import '../widgets/mood_selector_sheet.dart';
@@ -224,6 +228,7 @@ class DashboardTab extends StatelessWidget {
           final partnerMoodColor = EmoraColors.moodColors[state.partnerMood] ?? EmoraColors.secondary;
           final partnerMoodName = context.translate('mood.${state.partnerMood}');
           final partnerMoodEmoji = MoodSelectorSheet.moodEmojis[state.partnerMood] ?? '😊';
+          final myId = SupabaseHandler.client.auth.currentUser?.id;
 
           return RefreshIndicator(
             color: EmoraColors.primary,
@@ -261,10 +266,9 @@ class DashboardTab extends StatelessWidget {
                                   ? state.partnerName[0].toUpperCase()
                                   : 'P',
                               style: const TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: EmoraColors.primary,
-                              ),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: EmoraColors.primary),
                             ),
                           ),
                           const SizedBox(height: 12),
@@ -323,8 +327,23 @@ class DashboardTab extends StatelessWidget {
                               );
                             },
                             onLongPress: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Đang mở danh sách yêu cầu chăm sóc (Care Requests)...')),
+                              // Open care requests grid sheet
+                              showModalBottomSheet(
+                                context: context,
+                                backgroundColor: Colors.transparent,
+                                builder: (_) => CareRequestSheet(
+                                  onTemplateSelected: (templateId) {
+                                    context.read<DashboardBloc>().add(
+                                          CreateCareRequest(templateId),
+                                        );
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(context.translate('care_requests.success_sent')),
+                                        backgroundColor: EmoraColors.primary,
+                                      ),
+                                    );
+                                  },
+                                ),
                               );
                             },
                             child: Container(
@@ -364,7 +383,23 @@ class DashboardTab extends StatelessWidget {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 32),
+
+                    // Couple Home Screen Widget Simulator
+                    CoupleWidgetCard(
+                      partnerName: state.partnerName,
+                      partnerMood: state.partnerMood,
+                      activeRequests: state.activeRequests,
+                      myId: myId,
+                    ),
+                    const SizedBox(height: 32),
+
+                    // Active Care Requests List
+                    ActiveRequestsList(
+                      activeRequests: state.activeRequests,
+                      myId: myId,
+                    ),
+                    const SizedBox(height: 32),
 
                     // Interaction Tips Card
                     Container(
@@ -390,7 +425,7 @@ class DashboardTab extends StatelessWidget {
                           const SizedBox(height: 8),
                           _buildTipRow(Icons.favorite, 'Chạm đúp vào bong bóng để gửi Nudge yêu thương.'),
                           const SizedBox(height: 8),
-                          _buildTipRow(Icons.hourglass_empty, 'Nhấn giữ để gửi Yêu cầu chăm sóc (Care Request).'),
+                          _buildTipRow(Icons.hourglass_empty, 'Nhấn giữ bong bóng để gửi Yêu cầu chăm sóc (Care Request).'),
                         ],
                       ),
                     ),
