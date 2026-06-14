@@ -11,6 +11,9 @@ import '../../auth/bloc/auth_event.dart';
 import '../../auth/bloc/auth_state.dart';
 import '../../calendar/screens/calendar_tab.dart';
 import '../../settings/screens/settings_tab.dart';
+import '../../settings/bloc/theme_bloc.dart';
+import '../../settings/bloc/theme_state.dart';
+import '../widgets/dynamic_theme_background.dart';
 import '../bloc/dashboard_bloc.dart';
 import '../widgets/active_requests_list.dart';
 import '../widgets/care_request_sheet.dart';
@@ -18,6 +21,7 @@ import '../widgets/couple_widget_card.dart';
 import '../widgets/floating_hearts.dart';
 import '../widgets/hero_bubble_painter.dart';
 import '../widgets/mood_selector_sheet.dart';
+import '../widgets/baby_hub_card.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -70,6 +74,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeState = context.watch<ThemeBloc>().state;
+    final colors = themeState.themeColors;
+
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         // Temporarily commented out to bypass login
@@ -88,87 +95,96 @@ class _DashboardScreenState extends State<DashboardScreen> {
           // Trigger physical haptic feedback when a nudge is received
           HapticFeedback.lightImpact();
         },
-        child: Scaffold(
-          backgroundColor: EmoraColors.background,
-          appBar: AppBar(
-            backgroundColor: EmoraColors.surface,
-            elevation: 0,
-            title: Text(
-              _getTabTitle(_currentTabIndex, context),
-              style: const TextStyle(
-                fontFamily: 'Outfit',
-                fontWeight: FontWeight.bold,
-                color: EmoraColors.primary,
-                fontSize: 24,
-              ),
-            ),
-            centerTitle: true,
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.logout, color: EmoraColors.textMuted),
-                onPressed: () {
-                  context.read<AuthBloc>().add(LogoutRequested());
-                },
-              ),
-            ],
-          ),
-          body: IndexedStack(
-            index: _currentTabIndex,
-            children: const [
-              DashboardTab(),
-              CalendarTab(),
-              SettingsTab(),
-            ],
-          ),
-          bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 10,
-                  offset: const Offset(0, -2),
-                ),
-              ],
-            ),
-            child: BottomNavigationBar(
-              currentIndex: _currentTabIndex,
-              onTap: (index) {
-                setState(() {
-                  _currentTabIndex = index;
-                });
-              },
-              backgroundColor: EmoraColors.surface,
-              selectedItemColor: EmoraColors.primary,
-              unselectedItemColor: EmoraColors.textMuted,
-              selectedLabelStyle: const TextStyle(
-                fontFamily: 'Outfit',
-                fontWeight: FontWeight.bold,
-                fontSize: 12,
-              ),
-              unselectedLabelStyle: const TextStyle(
-                fontFamily: 'Outfit',
-                fontWeight: FontWeight.w500,
-                fontSize: 12,
-              ),
-              type: BottomNavigationBarType.fixed,
+        child: DynamicThemeBackground(
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: AppBar(
+              backgroundColor: colors.surface.withOpacity(0.85),
               elevation: 0,
-              items: [
-                const BottomNavigationBarItem(
-                  icon: Icon(Icons.favorite_border),
-                  activeIcon: Icon(Icons.favorite),
-                  label: 'Dashboard',
+              title: Text(
+                _getTabTitle(_currentTabIndex, context),
+                style: TextStyle(
+                  fontFamily: 'Outfit',
+                  fontWeight: FontWeight.bold,
+                  color: colors.primary,
+                  fontSize: 24,
                 ),
-                BottomNavigationBarItem(
-                  icon: const Icon(Icons.calendar_month_outlined),
-                  activeIcon: const Icon(Icons.calendar_month),
-                  label: context.translate('calendar.title'),
+              ),
+              centerTitle: true,
+              actions: [
+                IconButton(
+                  icon: Icon(Icons.sports_esports, color: colors.primary),
+                  tooltip: context.translate('vent_room.title'),
+                  onPressed: () {
+                    Navigator.pushNamed(context, EmoraRoutes.ventRoom);
+                  },
                 ),
-                BottomNavigationBarItem(
-                  icon: const Icon(Icons.settings_outlined),
-                  activeIcon: const Icon(Icons.settings),
-                  label: context.translate('settings.title'),
+                IconButton(
+                  icon: Icon(Icons.logout, color: colors.textMuted),
+                  onPressed: () {
+                    context.read<AuthBloc>().add(LogoutRequested());
+                  },
                 ),
               ],
+            ),
+            body: IndexedStack(
+              index: _currentTabIndex,
+              children: const [
+                DashboardTab(),
+                CalendarTab(),
+                SettingsTab(),
+              ],
+            ),
+            bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: colors.textDark.withOpacity(0.05),
+                    blurRadius: 10,
+                    offset: const Offset(0, -2),
+                  ),
+                ],
+              ),
+              child: BottomNavigationBar(
+                currentIndex: _currentTabIndex,
+                onTap: (index) {
+                  setState(() {
+                    _currentTabIndex = index;
+                  });
+                },
+                backgroundColor: colors.surface,
+                selectedItemColor: colors.primary,
+                unselectedItemColor: colors.textMuted,
+                selectedLabelStyle: const TextStyle(
+                  fontFamily: 'Outfit',
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                ),
+                unselectedLabelStyle: const TextStyle(
+                  fontFamily: 'Outfit',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 12,
+                ),
+                type: BottomNavigationBarType.fixed,
+                elevation: 0,
+                items: [
+                  const BottomNavigationBarItem(
+                    icon: Icon(Icons.favorite_border),
+                    activeIcon: Icon(Icons.favorite),
+                    label: 'Dashboard',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: const Icon(Icons.calendar_month_outlined),
+                    activeIcon: const Icon(Icons.calendar_month),
+                    label: context.translate('calendar.title'),
+                  ),
+                  BottomNavigationBarItem(
+                    icon: const Icon(Icons.settings_outlined),
+                    activeIcon: const Icon(Icons.settings),
+                    label: context.translate('settings.title'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -182,11 +198,14 @@ class DashboardTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeState = context.watch<ThemeBloc>().state;
+    final colors = themeState.themeColors;
+
     return BlocBuilder<DashboardBloc, DashboardState>(
       builder: (context, state) {
         if (state is DashboardLoading || state is DashboardInitial) {
-          return const Center(
-            child: CircularProgressIndicator(color: EmoraColors.primary),
+          return Center(
+            child: CircularProgressIndicator(color: colors.primary),
           );
         }
 
@@ -197,17 +216,17 @@ class DashboardTab extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(Icons.error_outline, size: 60, color: EmoraColors.primary),
+                  Icon(Icons.error_outline, size: 60, color: colors.primary),
                   const SizedBox(height: 16),
                   Text(
                     state.errorMessage,
-                    style: const TextStyle(fontSize: 16, color: EmoraColors.textDark),
+                    style: TextStyle(fontSize: 16, color: colors.textDark),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 24),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: EmoraColors.primary,
+                      backgroundColor: colors.primary,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(28),
                       ),
@@ -216,7 +235,7 @@ class DashboardTab extends StatelessWidget {
                     onPressed: () {
                       context.read<DashboardBloc>().add(const LoadDashboard());
                     },
-                    child: const Text('Thử lại', style: TextStyle(fontWeight: FontWeight.bold)),
+                    child: const Text('Thử lại', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
                   ),
                 ],
               ),
@@ -225,13 +244,13 @@ class DashboardTab extends StatelessWidget {
         }
 
         if (state is DashboardLoaded) {
-          final partnerMoodColor = EmoraColors.moodColors[state.partnerMood] ?? EmoraColors.secondary;
+          final partnerMoodColor = EmoraColors.moodColors[state.partnerMood] ?? colors.secondary;
           final partnerMoodName = context.translate('mood.${state.partnerMood}');
           final partnerMoodEmoji = MoodSelectorSheet.moodEmojis[state.partnerMood] ?? '😊';
           final myId = SupabaseHandler.client.auth.currentUser?.id;
 
           return RefreshIndicator(
-            color: EmoraColors.primary,
+            color: colors.primary,
             onRefresh: () async {
               context.read<DashboardBloc>().add(const LoadDashboard());
             },
@@ -246,11 +265,11 @@ class DashboardTab extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(20.0),
                       decoration: BoxDecoration(
-                        color: EmoraColors.surface,
+                        color: colors.surface.withOpacity(0.85),
                         borderRadius: BorderRadius.circular(32),
                         boxShadow: [
                           BoxShadow(
-                            color: EmoraColors.primary.withOpacity(0.05),
+                            color: colors.primary.withOpacity(0.05),
                             blurRadius: 20,
                             offset: const Offset(0, 8),
                           ),
@@ -265,27 +284,27 @@ class DashboardTab extends StatelessWidget {
                               state.partnerName.isNotEmpty
                                   ? state.partnerName[0].toUpperCase()
                                   : 'P',
-                              style: const TextStyle(
+                              style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: EmoraColors.primary),
+                                  color: colors.primary),
                             ),
                           ),
                           const SizedBox(height: 12),
                           Text(
                             state.partnerName,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color: EmoraColors.textDark,
+                              color: colors.textDark,
                             ),
                           ),
                           const SizedBox(height: 6),
-                          const Text(
+                          Text(
                             'Đang kết nối cùng bạn',
                             style: TextStyle(
                               fontSize: 14,
-                              color: EmoraColors.textMuted,
+                              color: colors.textMuted,
                             ),
                           ),
                         ],
@@ -321,7 +340,7 @@ class DashboardTab extends StatelessWidget {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(context.translate('nudge.sent_success')),
-                                  backgroundColor: EmoraColors.primary,
+                                  backgroundColor: colors.primary,
                                   duration: const Duration(seconds: 1),
                                 ),
                               );
@@ -339,7 +358,7 @@ class DashboardTab extends StatelessWidget {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(context.translate('care_requests.success_sent')),
-                                        backgroundColor: EmoraColors.primary,
+                                        backgroundColor: colors.primary,
                                       ),
                                     );
                                   },
@@ -359,10 +378,10 @@ class DashboardTab extends StatelessWidget {
                                     const SizedBox(height: 6),
                                     Text(
                                       partnerMoodName,
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
-                                        color: EmoraColors.textDark,
+                                        color: colors.textDark,
                                       ),
                                     ),
                                   ],
@@ -376,10 +395,10 @@ class DashboardTab extends StatelessWidget {
                     const SizedBox(height: 24),
                     Text(
                       'Trạng thái đối phương: $partnerMoodName $partnerMoodEmoji',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: EmoraColors.textDark,
+                        color: colors.textDark,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -394,6 +413,10 @@ class DashboardTab extends StatelessWidget {
                     ),
                     const SizedBox(height: 32),
 
+                    // Baby Hub Tracker Card
+                    const BabyHubCard(),
+                    const SizedBox(height: 32),
+
                     // Active Care Requests List
                     ActiveRequestsList(
                       activeRequests: state.activeRequests,
@@ -405,27 +428,27 @@ class DashboardTab extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(20.0),
                       decoration: BoxDecoration(
-                        color: EmoraColors.surface,
+                        color: colors.surface.withOpacity(0.85),
                         borderRadius: BorderRadius.circular(24),
-                        border: Border.all(color: EmoraColors.secondary.withOpacity(0.5), width: 1.5),
+                        border: Border.all(color: colors.secondary.withOpacity(0.5), width: 1.5),
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             '💡 Tương tác nhanh Cozy Haven',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: EmoraColors.primary,
+                              color: colors.primary,
                             ),
                           ),
                           const SizedBox(height: 12),
-                          _buildTipRow(Icons.touch_app, 'Chạm 1 lần vào bong bóng để đổi cảm xúc của bạn.'),
+                          _buildTipRow(Icons.touch_app, 'Chạm 1 lần vào bong bóng để đổi cảm xúc của bạn.', colors),
                           const SizedBox(height: 8),
-                          _buildTipRow(Icons.favorite, 'Chạm đúp vào bong bóng để gửi Nudge yêu thương.'),
+                          _buildTipRow(Icons.favorite, 'Chạm đúp vào bong bóng để gửi Nudge yêu thương.', colors),
                           const SizedBox(height: 8),
-                          _buildTipRow(Icons.hourglass_empty, 'Nhấn giữ bong bóng để gửi Yêu cầu chăm sóc (Care Request).'),
+                          _buildTipRow(Icons.hourglass_empty, 'Nhấn giữ bong bóng để gửi Yêu cầu chăm sóc (Care Request).', colors),
                         ],
                       ),
                     ),
@@ -442,18 +465,18 @@ class DashboardTab extends StatelessWidget {
     );
   }
 
-  Widget _buildTipRow(IconData icon, String text) {
+  Widget _buildTipRow(IconData icon, String text, ThemeColors colors) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(icon, size: 18, color: EmoraColors.tertiary),
+        Icon(icon, size: 18, color: colors.primary),
         const SizedBox(width: 10),
         Expanded(
           child: Text(
             text,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
-              color: EmoraColors.textDark,
+              color: colors.textDark,
             ),
           ),
         ),

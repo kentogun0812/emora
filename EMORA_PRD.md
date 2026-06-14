@@ -101,9 +101,7 @@ Dưới đây là bảng đánh giá chi tiết từng chức năng từ bản t
     *   **Giá trị:** Biểu đạt "Anh/Em đang nhớ bạn" một cách tức thì, không cần gõ chữ, tăng tương tác tự nhiên.
     *   **Kỹ thuật:** Lắng nghe cảm biến gia tốc thiết bị (Accelerometer) -> trigger push notification gửi tín hiệu qua Firebase Cloud Messaging (FCM).
 
-3.  **"Love Note Wheel" (Vòng quay ngọt ngào):**
-    *   **Mô tả:** Thay vì gõ văn bản, người dùng vuốt một bánh xe chứa sẵn 8 lời khen ngợi/cảm ơn siêu ngắn (Ví dụ: *"Cảm ơn vì cốc cà phê"*, *"Hôm nay bạn siêu đẹp trai/đẹp gái"*, *"Nhớ bạn quá đi mất"*).
-    *   **Giá trị:** Loại bỏ áp lực suy nghĩ nội dung nhắn tin, khuyến khích các cặp đôi bày tỏ lòng biết ơn thường xuyên hơn.
+
 
 ---
 
@@ -141,11 +139,12 @@ Dưới đây là bảng đánh giá chi tiết từng chức năng từ bản t
 6.  **Yêu cầu chăm sóc (Care Requests):** Gửi 6 template yêu cầu cơ bản trong 1-tap, hỗ trợ phản hồi trạng thái Nhận việc / Hoàn thành việc nhanh từ thông báo đẩy.
 7.  **Emora Couple Widget:** Hiển thị Mood và các Care Requests đang chờ xử lý của đối phương trực tiếp trên màn hình chính.
 
-### 7.2 Tính năng Hoãn lại (Delayed to Phase 2/3/4)
-1.  Phòng Trút Giận (The Vent Room - Phase 2)
-2.  Trợ lý tiêm chủng và khám sức khỏe tự động (Phase 3)
-3.  Bộ Theme & Icon Premium (Phase 4)
-4.  Cổng thanh toán In-App Purchase (Phase 4)
+### 7.2 Tính năng Hoãn lại (Delayed to Phase 5 / Phase sau)
+1.  **FCM Push Notifications (Dời sang Phase 5):** Tính năng gửi thông báo đẩy qua Firebase khi ứng dụng bị tắt.
+2.  **Cổng thanh toán thật (Real In-App Purchase Billing - Dời sang Phase 5):** Tích hợp Google Play Billing / App Store Billing thực tế thông qua SDK RevenueCat.
+3.  **"Love Note Wheel" (Vòng quay ngọt ngào - Hoãn lại sau MVP):** Bánh xe vuốt chọn nhanh 8 lời khen ngợi/cảm ơn siêu ngắn để gửi cho đối phương.
+
+*(Lưu ý: Các tính năng thuộc Phase 2, 3, 4 ban đầu trì hoãn đã được hoàn thành đầy đủ ở các đợt cập nhật trước).*
 
 ### 7.3 Không thuộc phạm vi dự án (Out of Scope)
 *   Phân tích tâm trạng bằng AI (AI Mood Analysis).
@@ -217,18 +216,25 @@ graph TD
 gantt
     title Lộ trình Phát triển Sản phẩm Emora
     dateFormat  YYYY-MM-DD
-    section Phase 1: MVP Setup
-    Hạ tầng & Đăng nhập (Sprint 1)        :active, 2026-06-15, 7d
-    Mood Sharing & Hero Bubble (Sprint 2)  :active, 2026-06-22, 7d
-    Cycle Tracking & Shared Journal (Sprint 3): 2026-06-29, 10d
-    Care Requests & Couple Widget (Sprint 4) : 2026-07-09, 10d
-    Thử nghiệm Alpha & Beta (Sprint 5)    : 2026-07-19, 7d
-    section Phase 2: Playful Venting
-    Tính năng The Vent Room              : 2026-07-26, 14d
-    section Phase 3: Family Assistant
-    Trợ lý Tiêm chủng & Lịch y tế         : 2026-08-09, 14d
-    section Phase 4: Launch & Premium
-    IAP Setup & Đưa lên Store            : 2026-08-23, 14d
+    
+    section Phase 1: MVP Setup (Completed)
+    Hạ tầng & Đăng nhập (Sprint 1)                   :done, 2026-06-15, 7d
+    Mood Sharing & Hero Bubble (Sprint 2)             :done, 2026-06-22, 7d
+    Cycle Tracking & Shared Journal (Sprint 3)       :done, 2026-06-29, 10d
+    Care Requests & Couple Widget (Sprint 4)          :done, 2026-07-09, 10d
+    Thử nghiệm Alpha & Beta (Sprint 5)               :active, 2026-07-19, 7d
+    
+    section Phase 2: Playful Venting (Completed)
+    The Vent Room & Pillow Fight (Sprint 6-7)         :done, 2026-07-26, 14d
+    
+    section Phase 3: Family Assistant (Completed)
+    Trợ lý Tiêm chủng & Lịch y tế (Sprint 8)          :done, 2026-08-09, 14d
+    
+    section Phase 4: Premium & Dynamic Themes (Completed)
+    Theme động & Thanh toán giả lập (Sprint 9)         :done, 2026-08-23, 14d
+    
+    section Phase 5: Final Integrations (Pending)
+    FCM Push & Cổng thanh toán thật (Sprint 10)       :crit, 2026-09-06, 14d
 ```
 
 ---

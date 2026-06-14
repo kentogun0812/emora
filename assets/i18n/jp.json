@@ -66,7 +66,10 @@
     "period_length": "生理期間 (日)",
     "save_settings": "設定を保存",
     "disconnect": "ペアリング解除",
-    "days_together": "付き合ってから: {days}日"
+    "days_together": "付き合ってから: {days}日",
+    "theme_title": "画面＆ダイナミックテーマ",
+    "premium_badge": "プレミアム",
+    "upgrade_premium": "プレミアムアップグレード"
   },
   "care_requests": {
     "title": "おねだり・お手伝い",
@@ -89,5 +92,58 @@
     "no_active": "現在待機中のおねだりはありません。",
     "sent_by_me": "あなたのおねだり",
     "sent_by_partner": "パートナーのおねだり"
+  },
+  "vent_room": {
+    "title": "プレイルーム",
+    "pillow_sent": "💥 枕を投げました！",
+    "tickle_sent": "🪶 こちょこちょ中...",
+    "balloon_sent": "🎈 風船を放ちました！",
+    "pop_balloon": "❤️ 風船が破裂しました！",
+    "balloon_message": "愛を送ります！"
+  },
+  "baby": {
+    "title": "赤ちゃんルーム",
+    "setup_title": "赤ちゃんプロフィールの作成",
+    "edit_title": "赤ちゃんプロフィールの編集",
+    "name": "赤ちゃんの名前",
+    "gender": "性別",
+    "gender_male": "男の子",
+    "gender_female": "女の子",
+    "gender_unknown": "不明",
+    "dob": "生年月日",
+    "avatar": "代表絵文字",
+    "vaccination_tracker": "予防接種ナビ",
+    "all": "すべて",
+    "overdue": "期限超過",
+    "pending": "未接種",
+    "done": "接種済み",
+    "recommended_age": "推奨時期: {age}ヶ月",
+    "planned_date": "予定日",
+    "administered_date": "接種日",
+    "notes": "追加メモ",
+    "save_changes": "変更を保存",
+    "create_profile": "プロフィール作成",
+    "disease": "予防する病気",
+    "no_baby_desc": "赤ちゃんプロフィールを作成して、予防接種スケジュールの確認や二人の健康管理をスタートしましょう。",
+    "status": "ステータス",
+    "notes_placeholder": "メモを入力 (発熱、医療機関など...)",
+    "not_set": "記録なし",
+    "success_save": "赤ちゃん情報を正常に保存しました！"
+  },
+  "premium": {
+    "title": "Emoraプレミアム",
+    "desc": "パートナーとの特別な体験をアンロックしましょう",
+    "features_theme": "4つのユニークなダイナミックテーマ＆アニメーション背景",
+    "features_vent": "プレイルーム（すっきりルーム）での感情表現アクションが無制限",
+    "features_ads": "広告なしでスムーズかつ快適な使用環境",
+    "upgrade_btn": "テストアップグレード（無料）",
+    "trial_desc": "プレミアム機能テストのための模擬決済",
+    "success_title": "アップグレード成功",
+    "success_desc": "おめでとうございます！プレミアム特典がすべてアンロックされました。",
+    "close": "閉じる",
+    "processing": "決済処理中...",
+    "limit_reached_title": "本日の上限に達しました",
+    "limit_reached_desc": "本日の無料分である5回のプレイアクションをすべて消費しました。続けるにはプレミアムにアップグレードしてください！",
+    "upgrade_now": "今すぐアップグレード"
   }
 }

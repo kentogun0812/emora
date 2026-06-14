@@ -49,11 +49,13 @@ Tài liệu theo dõi tiến độ phát triển dự án Emora theo đúng quy 
 
 ## Các Sprint Tiếp theo (Phase sau)
 *   **Phase 1: MVP Setup** | Trạng thái: ✅ Completed (Bypass Sprint 5)
-    *   **Sprint 5: Push Notifications & Beta Test** | Trạng thái: ⚠️ Pending (Bypassed)
-*   **Phase 2: Playful Venting (Chăm sóc vui vẻ)** | Trạng thái: ⬜ Not Started (Xem chi tiết tại [phase_2_proposal.md](file:///C:/Users/Admin/.gemini/antigravity-ide/brain/a8e0cbf7-826d-4f3a-a54a-ceacc24c715e/phase_2_proposal.md))
-    *   **Sprint 6: The Vent Room & Pillow Fight Interactions** | Trạng thái: ⬜ Not Started
-    *   **Sprint 7: Real-time WebSocket Messaging & Interactive Animations** | Trạng thái: ⬜ Not Started
-*   **Phase 3: Family Assistant (Trợ lý gia đình)** | Trạng thái: ⬜ Not Started
-    *   **Sprint 8: Baby Vaccination Tracker** | Trạng thái: ⬜ Not Started
-*   **Phase 4: Premium & Dynamic Themes** | Trạng thái: ⬜ Not Started
-    *   **Sprint 9: Dynamic Themes, custom stickers and Payment Integration** | Trạng thái: ⬜ Not Started
+    *   **Sprint 5: Push Notifications & Beta Test** | Trạng thái: ⚠️ Pending (Dời sang Phase 5)
+*   **Phase 2: Playful Venting (Chăm sóc vui vẻ)** | Trạng thái: ✅ Completed (Xem chi tiết tại [phase_2_proposal.md](file:///C:/Users/Admin/.gemini/antigravity-ide/brain/a8e0cbf7-826d-4f3a-a54a-ceacc24c715e/phase_2_proposal.md))
+    *   **Sprint 6: The Vent Room & Pillow Fight Interactions** | Trạng thái: ✅ Completed (13/06/2026)
+    *   **Sprint 7: Real-time WebSocket Messaging & Interactive Animations** | Trạng thái: ✅ Completed (13/06/2026)
+*   **Phase 3: Family Assistant (Trợ lý gia đình)** | Trạng thái: ✅ Completed
+    *   **Sprint 8: Baby Vaccination Tracker** | Trạng thái: ✅ Completed (13/06/2026)
+*   **Phase 4: Premium & Dynamic Themes** | Trạng thái: ✅ Completed
+    *   **Sprint 9: Dynamic Themes, custom stickers and Payment Integration** | Trạng thái: ✅ Completed (13/06/2026) | Định nghĩa 4 bộ màu theme, xây dựng BLoC tự động lưu trữ cấu hình qua `HydratedBloc`, thiết kế nền động hạt chuyển động CustomPainter, paywall chào hàng Premium kèm cổng thanh toán giả lập (Mock Checkout) 1.5s, và áp dụng hạn mức 5 lượt/ngày cho Phòng Vui Vẻ.
+*   **Phase 5: Final Integrations (Push Notifications & Cổng thanh toán thật)** | Trạng thái: ⚠️ Pending
+    *   **Sprint 10: FCM Push Notifications & Real In-App Purchase Billing** | Trạng thái: ⚠️ Pending (Thực hiện cuối cùng) | Tích hợp Firebase Cloud Messaging (FCM) thông báo đẩy realtime và kết nối cổng thanh toán thật Google Play Billing / App Store IAP qua RevenueCat SDK.

@@ -66,7 +66,10 @@
     "period_length": "Số ngày hành kinh (ngày)",
     "save_settings": "Lưu cài đặt",
     "disconnect": "Hủy kết nối cặp đôi",
-    "days_together": "Thời gian bên nhau: {days} ngày"
+    "days_together": "Thời gian bên nhau: {days} ngày",
+    "theme_title": "Giao diện & Theme động",
+    "premium_badge": "Premium",
+    "upgrade_premium": "Nâng cấp Premium"
   },
   "care_requests": {
     "title": "Yêu cầu Chăm sóc",
@@ -89,5 +92,58 @@
     "no_active": "Không có yêu cầu nào đang chờ xử lý.",
     "sent_by_me": "Bạn yêu cầu",
     "sent_by_partner": "Đối phương yêu cầu"
+  },
+  "vent_room": {
+    "title": "Phòng Vui Vẻ",
+    "pillow_sent": "💥 Đã ném gối!",
+    "tickle_sent": "🪶 Đang cù lét...",
+    "balloon_sent": "🎈 Đã thả bóng bay!",
+    "pop_balloon": "❤️ Bạn đã vỡ quả bóng!",
+    "balloon_message": "Gửi yêu thương!"
+  },
+  "baby": {
+    "title": "Góc Bé Yêu",
+    "setup_title": "Tạo Hồ Sơ Bé Yêu",
+    "edit_title": "Chỉnh sửa Hồ Sơ Bé Yêu",
+    "name": "Tên của bé",
+    "gender": "Giới tính",
+    "gender_male": "Nam",
+    "gender_female": "Nữ",
+    "gender_unknown": "Chưa rõ",
+    "dob": "Ngày sinh của bé",
+    "avatar": "Biểu tượng đại diện",
+    "vaccination_tracker": "Trợ lý Tiêm Chủng",
+    "all": "Tất cả",
+    "overdue": "Trễ lịch",
+    "pending": "Chưa tiêm",
+    "done": "Đã tiêm",
+    "recommended_age": "Khuyến nghị: {age} tháng",
+    "planned_date": "Ngày dự kiến",
+    "administered_date": "Ngày tiêm thực tế",
+    "notes": "Ghi chú thêm",
+    "save_changes": "Lưu thay đổi",
+    "create_profile": "Tạo hồ sơ",
+    "disease": "Phòng bệnh",
+    "no_baby_desc": "Bắt đầu lập lịch tiêm chủng trọn gói và theo dõi sức khỏe cho bé yêu của hai bạn.",
+    "status": "Trạng thái",
+    "notes_placeholder": "Nhập ghi chú (nhiệt độ sốt, cơ sở y tế...)",
+    "not_set": "Chưa cập nhật",
+    "success_save": "Lưu thông tin thành công!"
+  },
+  "premium": {
+    "title": "Emora Premium",
+    "desc": "Mở khóa những trải nghiệm tuyệt vời cùng đối phương",
+    "features_theme": "Bộ sưu tập 4 Giao diện & Hình nền động độc đáo",
+    "features_vent": "Giải tỏa không giới hạn trong Phòng Vui Vẻ",
+    "features_ads": "Không quảng cáo, không bị gián đoạn",
+    "upgrade_btn": "Nâng cấp thử nghiệm (Miễn phí)",
+    "trial_desc": "Thanh toán giả lập để thử nghiệm tính năng",
+    "success_title": "Nâng cấp thành công",
+    "success_desc": "Chúc mừng! Bạn đã mở khóa toàn bộ đặc quyền Premium.",
+    "close": "Đóng",
+    "processing": "Đang xử lý giao dịch...",
+    "limit_reached_title": "Hạn mức hôm nay đã hết",
+    "limit_reached_desc": "Bạn đã sử dụng hết 5 lượt chọc ghẹo miễn phí trong ngày hôm nay. Hãy nâng cấp Premium để tiếp tục!",
+    "upgrade_now": "Nâng cấp ngay"
   }
 }

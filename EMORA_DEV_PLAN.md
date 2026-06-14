@@ -398,45 +398,67 @@ supabase/
 
 ## 6. Phân bổ Kế hoạch Phát triển (Development Sprints)
 
-Lộ trình phát triển MVP được xây dựng gọn gàng trong **5 tuần (5 Sprints)** dành cho 1 Developer hoạt động độc lập:
+Lộ trình phát triển được phân bổ chi tiết qua các giai đoạn (Phases) và các Sprint để đảm bảo tính sẵn sàng cao, hoàn thành và bàn giao từng phần:
 
-### Sprint 1: Setup Dự án, Auth & Ghép đôi (Tuần 1)
-*   **Tasks:**
-    *   Khởi tạo dự án Flutter (Cấu hình core theme, router).
-    *   Khởi tạo dự án Supabase (Tạo cơ sở dữ liệu Postgres, chạy SQL DDL setup các bảng).
-    *   Cấu hình Supabase Auth (Tích hợp Google & Apple Sign-In).
-    *   Code màn hình Splash Screen, Login Screen và logic Pairing Screen (tạo/nhập mã 6 số và quét QR).
-*   **Milestone 1:** Người dùng đăng nhập thành công và ghép đôi realtime thành công giữa 2 thiết bị.
+### Phase 1: MVP Setup
+*   **Sprint 1: Setup Dự án, Auth & Ghép đôi (Tuần 1)** [✅ Completed]
+    *   **Tasks:**
+        *   Khởi tạo dự án Flutter (Cấu hình core theme, router).
+        *   Khởi tạo dự án Supabase (Tạo cơ sở dữ liệu Postgres, chạy SQL DDL setup các bảng).
+        *   Cấu hình Supabase Auth (Tích hợp Google & Apple Sign-In).
+        *   Code màn hình Splash Screen, Login Screen và logic Pairing Screen (tạo/nhập mã 6 số và quét QR).
+    *   **Milestone 1:** Người dùng đăng nhập thành công và ghép đôi realtime thành công giữa 2 thiết bị.
 
-### Sprint 2: Đồng bộ Mood & Tương tác Hero Bubble (Tuần 2)
-*   **Tasks:**
-    *   Thiết kế giao diện Dashboard Screen. Xây dựng Custom Painter vẽ Hero Bubble động.
-    *   Lập trình tính năng Mood Sharing (vòng quay chọn mood, update lên bảng `users`).
-    *   Kết nối kênh lắng nghe realtime qua Supabase Realtime SDK để đổi màu bong bóng trên cả hai thiết bị ngay khi có thay đổi.
-    *   Xây dựng tính năng "Appreciation Shake" (Lắc máy gửi rung động haptic qua accelerometer).
-*   **Milestone 2:** Hai thiết bị có thể thay đổi trạng thái cảm xúc của nhau tức thì trên màn hình chính mà không cần tải lại app.
+*   **Sprint 2: Đồng bộ Mood & Tương tác Hero Bubble (Tuần 2)** [✅ Completed]
+    *   **Tasks:**
+        *   Thiết kế giao diện Dashboard Screen. Xây dựng Custom Painter vẽ Hero Bubble động.
+        *   Lập trình tính năng Mood Sharing (vòng quay chọn mood, update lên bảng `users`).
+        *   Kết nối kênh lắng nghe realtime qua Supabase Realtime SDK để đổi màu bong bóng trên cả hai thiết bị ngay khi có thay đổi.
+        *   Xây dựng tính năng "Appreciation Shake" (Lắc máy gửi rung động haptic qua accelerometer).
+    *   **Milestone 2:** Hai thiết bị có thể thay đổi trạng thái cảm xúc của nhau tức thì trên màn hình chính mà không cần tải lại app.
 
-### Sprint 3: Ghi nhận Kỳ kinh & Nhật ký dùng chung (Tuần 3)
-*   **Tasks:**
-    *   Xây dựng màn hình Calendar Screen sử dụng thư viện `table_calendar`.
-    *   Lập trình tính năng Cycle Tracking (lưu trữ ngày kinh ở bảng `period_logs` và cài đặt quyền riêng tư chu kỳ).
-    *   Lập trình tính năng Shared Journal (lưu trữ ghi chép quan hệ bảo vệ/không bảo vệ trực tiếp trên Calendar).
-    *   Viết logic SQL Database Views tính toán dự đoán ngày chu kỳ tiếp theo dựa trên dữ liệu lịch sử.
-*   **Milestone 3:** Bạn nữ ghi chép được chu kỳ, dữ liệu tự đồng bộ hóa lên lịch dùng chung và bạn nam nhìn thấy trạng thái vĩ mô (PMS, v.v.).
+*   **Sprint 3: Ghi nhận Kỳ kinh & Nhật ký dùng chung (Tuần 3)** [✅ Completed]
+    *   **Tasks:**
+        *   Xây dựng màn hình Calendar Screen sử dụng thư viện `table_calendar`.
+        *   Lập trình tính năng Cycle Tracking (lưu trữ ngày kinh ở bảng `period_logs` và cài đặt quyền riêng tư chu kỳ).
+        *   Lập trình tính năng Shared Journal (lưu trữ ghi chép quan hệ bảo vệ/không bảo vệ trực tiếp trên Calendar).
+        *   Viết logic SQL Database Views tính toán dự đoán ngày chu kỳ tiếp theo dựa trên dữ liệu lịch sử.
+    *   **Milestone 3:** Bạn nữ ghi chép được chu kỳ, dữ liệu tự đồng bộ hóa lên lịch dùng chung và bạn nam nhìn thấy trạng thái vĩ mô (PMS, v.v.).
 
-### Sprint 4: Yêu cầu Chăm sóc & Couple Widget (Tuần 4)
-*   **Tasks:**
-    *   Lập trình ngăn kéo Care Requests Bottom Drawer trên Dashboard.
-    *   Xây dựng luồng công việc của yêu cầu chăm sóc (`Pending` -> `Accepted` -> `Completed`).
-    *   Thiết kế và lập trình **Emora Couple Widget** cho màn hình khóa/màn hình chính điện thoại (iOS WidgetKit / Android AppWidget) để hiển thị Mood và Care Request chưa hoàn thành.
-*   **Milestone 4:** Gửi và tiếp nhận Care Request hoàn chỉnh qua 1 chạm trực tiếp trên giao diện và Widget.
+*   **Sprint 4: Yêu cầu Chăm sóc & Couple Widget (Tuần 4)** [✅ Completed]
+    *   **Tasks:**
+        *   Lập trình ngăn kéo Care Requests Bottom Drawer trên Dashboard.
+        *   Xây dựng luồng công việc của yêu cầu chăm sóc (`Pending` -> `Accepted` -> `Completed`).
+        *   Thiết kế và lập trình **Emora Couple Widget** cho màn hình khóa/màn hình chính điện thoại để hiển thị Mood và Care Request chưa hoàn thành.
+    *   **Milestone 4:** Gửi và tiếp nhận Care Request hoàn chỉnh qua 1 chạm trực tiếp trên giao diện và Widget.
 
-### Sprint 5: FCM Push Notifications & Alpha Test (Tuần 5)
-*   **Tasks:**
-    *   Tích hợp Firebase Cloud Messaging (FCM) SDK vào Flutter Client.
-    *   Viết Supabase Edge Function lắng nghe Database Webhook để bắn API FCM Push Notification tự động khi có các sự kiện: Mood được cập nhật, Có Care Request mới, Care Request được hoàn thành.
-    *   Chạy thử nghiệm Alpha/Beta giới hạn cho 10-20 cặp đôi trải nghiệm thực tế. Tối ưu hiệu năng ứng dụng (dung lượng app dưới 40MB).
-*   **Milestone 5:** Ra mắt bản phát hành Beta hoàn chỉnh, hệ thống thông báo đẩy chạy mượt mà trên cả iOS và Android.
+*   **Sprint 5: Thử nghiệm Alpha & Beta (Tuần 5)** [⚠️ Pending - Dời sang Phase 5]
+    *   **Tasks:**
+        *   Tạm thời bỏ qua phần cấu hình Push Notifications (Chuyển sang Phase 5).
+        *   Chạy thử nghiệm Alpha/Beta giới hạn cho 10-20 cặp đôi trải nghiệm thực tế với cơ chế bypass/realtime sync WebSocket.
+        *   Tối ưu hiệu năng ứng dụng (dung lượng app dưới 40MB) và sửa lỗi giao diện.
+    *   **Milestone 5:** Ra mắt bản phát hành Beta chạy mượt mà trên môi trường giả lập/realtime.
+
+### Phase 2: Playful Venting (Chăm sóc vui vẻ) [✅ Completed]
+*   **Sprint 6: The Vent Room & Pillow Fight Interactions** [✅ Completed]
+    *   **Tasks:** Thiết kế Phòng Trút Giận (The Vent Room), vẽ sticker động Pillow/Punch, cơ chế ném gối và đấm bao cát giảm stress.
+*   **Sprint 7: Real-time WebSocket Messaging & Interactive Animations** [✅ Completed]
+    *   **Tasks:** Lắng nghe realtime các tương tác ném gối qua Supabase Realtime Broadcast để hiển thị animation bay nhảy mượt mà trên máy đối phương.
+
+### Phase 3: Family Assistant (Trợ lý gia đình) [✅ Completed]
+*   **Sprint 8: Baby Vaccination Tracker** [✅ Completed]
+    *   **Tasks:** Cung cấp Trợ lý Lịch tiêm chủng cho trẻ, tự động tính lịch tiêm theo ngày sinh của bé và đồng bộ hóa realtime giữa cha mẹ.
+
+### Phase 4: Premium & Dynamic Themes [✅ Completed]
+*   **Sprint 9: Dynamic Themes, Custom Stickers and Payment Integration** [✅ Completed]
+    *   **Tasks:** Thiết kế 4 bộ màu theme động (Classic Cozy, Ocean Breeze, Sunset Glow, Forest Moss), paywall chào hàng Premium kèm cổng thanh toán giả lập (Mock Checkout), giới hạn lượt dùng thử cho phòng trút giận (5 lượt/ngày đối với tài khoản thường).
+
+### Phase 5: Final Integrations (Push Notifications & Cổng thanh toán thật) [⚠️ Pending - Thực hiện cuối cùng]
+*   **Sprint 10: FCM Push Notifications & Real In-App Purchase Billing** [⚠️ Pending]
+    *   **Tasks:**
+        *   Tích hợp Firebase Cloud Messaging (FCM) SDK gửi thông báo đẩy realtime khi tắt app.
+        *   Tích hợp cổng thanh toán thật (Google Play Billing / App Store In-App Purchase) thông qua RevenueCat SDK để thay thế cổng thanh toán giả lập.
+    *   **Milestone 10:** Bản phát hành thương mại chính thức hoạt động 100% dịch vụ bên thứ 3.
 
 ---
 
@@ -462,8 +484,7 @@ Nhờ áp dụng hạ tầng **Serverless BaaS**, chi phí cố định hàng th
 ### 8.1 Kiến trúc phù hợp nhất cho MVP
 Lựa chọn **Supabase** kết hợp **Flutter** là phương án tối ưu tối đa về mặt chi phí và tốc độ phát triển cho 1 developer duy nhất. Lập trình viên không cần viết API Boilerplate, không cần cài đặt các tiến trình nền Docker/K8s, mà chỉ cần tập trung 100% sức lực vào việc thiết kế giao diện Flutter tinh tế, mượt mà và viết các câu lệnh truy vấn dữ liệu trực tiếp từ client.
 
-### 8.2 Các tính năng hoãn lại sang Phase 2/3 để giữ sản phẩm tối giản
-Để đảm bảo MVP ra mắt nhanh chóng trong 5 tuần, các chức năng sau cần được hoãn lại nghiêm ngặt:
-1.  **Phòng Trút Giận (The Vent Room - Phase 2):** Cần đầu tư nhiều thời gian thiết kế animation động và cấu hình WebSocket realtime nâng cao -> Hoãn.
-2.  **Trợ lý Tiêm chủng & Lịch khám Y tế của con (Phase 3):** Yêu cầu thiết lập database y khoa phức tạp -> Hoãn.
-3.  **Hệ thống Thanh toán Premium (Phase 4):** Chỉ tích hợp khi sản phẩm đã chứng minh được sự gắn kết của người dùng (D7 Retention >30%) -> Hoãn.
+### 8.2 Các tính năng hoãn lại sang Phase 5 (Thực hiện cuối cùng) để giữ sản phẩm tối giản
+Để đảm bảo các sprint diễn ra nhanh chóng và độc lập với các dịch vụ bên thứ 3 phức tạp, các chức năng sau được hoãn lại và thực hiện tại Phase 5:
+1.  **FCM Push Notifications:** Tính năng thông báo đẩy khi tắt ứng dụng thông qua Firebase Cloud Messaging.
+2.  **Cổng thanh toán thật (Real In-App Purchase Billing):** Kết nối Google Play Billing / App Store Billing thực tế thông qua SDK RevenueCat.

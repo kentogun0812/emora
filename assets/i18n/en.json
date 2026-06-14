@@ -66,7 +66,10 @@
     "period_length": "Period Duration (days)",
     "save_settings": "Save Settings",
     "disconnect": "Disconnect Couple",
-    "days_together": "Days together: {days} days"
+    "days_together": "Days together: {days} days",
+    "theme_title": "Interface & Dynamic Themes",
+    "premium_badge": "Premium",
+    "upgrade_premium": "Upgrade to Premium"
   },
   "care_requests": {
     "title": "Care Requests",
@@ -89,5 +92,58 @@
     "no_active": "No active care requests pending.",
     "sent_by_me": "Requested by you",
     "sent_by_partner": "Requested by partner"
+  },
+  "vent_room": {
+    "title": "Playful Room",
+    "pillow_sent": "💥 Pillow thrown!",
+    "tickle_sent": "🪶 Tickling...",
+    "balloon_sent": "🎈 Balloons released!",
+    "pop_balloon": "❤️ You popped the balloon!",
+    "balloon_message": "Sending love!"
+  },
+  "baby": {
+    "title": "Baby Hub",
+    "setup_title": "Create Baby Profile",
+    "edit_title": "Edit Baby Profile",
+    "name": "Baby's Name",
+    "gender": "Gender",
+    "gender_male": "Male",
+    "gender_female": "Female",
+    "gender_unknown": "Unknown",
+    "dob": "Date of Birth",
+    "avatar": "Avatar Emoji",
+    "vaccination_tracker": "Vaccination Tracker",
+    "all": "All",
+    "overdue": "Overdue",
+    "pending": "Pending",
+    "done": "Completed",
+    "recommended_age": "Recommended: {age} months",
+    "planned_date": "Planned Date",
+    "administered_date": "Administered Date",
+    "notes": "Additional Notes",
+    "save_changes": "Save Changes",
+    "create_profile": "Create Profile",
+    "disease": "Prevention",
+    "no_baby_desc": "Create a baby profile to auto-generate a custom vaccination tracker and track health updates together.",
+    "status": "Status",
+    "notes_placeholder": "Enter notes (fever temperature, clinic...)",
+    "not_set": "Not updated",
+    "success_save": "Successfully saved baby info!"
+  },
+  "premium": {
+    "title": "Emora Premium",
+    "desc": "Unlock wonderful experiences with your partner",
+    "features_theme": "Collection of 4 Unique Themes & Dynamic Backgrounds",
+    "features_vent": "Unlimited venting actions in Playful Room",
+    "features_ads": "Ad-free & uninterrupted experience",
+    "upgrade_btn": "Upgrade Test (Free)",
+    "trial_desc": "Simulated payment for testing premium features",
+    "success_title": "Upgrade Successful",
+    "success_desc": "Congratulations! You have unlocked all Premium features.",
+    "close": "Close",
+    "processing": "Processing transaction...",
+    "limit_reached_title": "Daily Limit Reached",
+    "limit_reached_desc": "You have used all 5 free playful actions for today. Upgrade to Premium to continue!",
+    "upgrade_now": "Upgrade Now"
   }
 }
