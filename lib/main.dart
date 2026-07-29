@@ -9,8 +9,13 @@ import 'core/constants/routes.dart';
 import 'core/network/supabase_handler.dart';
 import 'core/utils/localization.dart';
 import 'features/auth/bloc/auth_bloc.dart';
+import 'features/auth/bloc/auth_state.dart';
+import 'features/auth/screens/splash_screen.dart';
+import 'features/auth/screens/login_screen.dart';
+import 'features/auth/screens/onboarding_screen.dart';
 import 'features/dashboard/bloc/dashboard_bloc.dart';
 import 'features/pairing/bloc/pairing_bloc.dart';
+import 'features/pairing/screens/pairing_screen.dart';
 import 'features/calendar/bloc/calendar_bloc.dart';
 import 'features/calendar/bloc/calendar_event.dart';
 import 'features/dashboard/screens/dashboard_screen.dart';
@@ -23,6 +28,11 @@ import 'features/baby/screens/vaccine_tracker_screen.dart';
 import 'features/settings/bloc/theme_bloc.dart';
 import 'features/settings/bloc/theme_state.dart';
 import 'features/settings/screens/premium_paywall_screen.dart';
+import 'features/auth/screens/signup_screen.dart';
+import 'features/auth/screens/profile_setup_screen.dart';
+import 'core/utils/auth_guard.dart';
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,6 +53,11 @@ void main() async {
     'SUPABASE_ANON_KEY',
     defaultValue: 'your-supabase-anon-key',
   );
+
+  if (kDebugMode) {
+    print('EMORA_DEBUG: supabaseUrl = $supabaseUrl');
+    print('EMORA_DEBUG: supabaseAnonKey = ${supabaseAnonKey.isNotEmpty ? (supabaseAnonKey.length > 20 ? "${supabaseAnonKey.substring(0, 10)}..." : supabaseAnonKey) : "EMPTY"}');
+  }
 
   await SupabaseHandler.initialize(
     url: supabaseUrl,
@@ -86,6 +101,7 @@ class EmoraApp extends StatelessWidget {
           final colors = themeState.themeColors;
 
           return MaterialApp(
+            navigatorKey: navigatorKey,
             title: 'Emora',
             debugShowCheckedModeBanner: false,
 
@@ -123,16 +139,49 @@ class EmoraApp extends StatelessWidget {
             },
 
             // Screen routing management
-            initialRoute: EmoraRoutes.dashboard,
+            initialRoute: EmoraRoutes.splash,
             routes: {
-              EmoraRoutes.splash: (context) => const DashboardScreen(),
-              EmoraRoutes.login: (context) => const DashboardScreen(),
-              EmoraRoutes.pairing: (context) => const DashboardScreen(),
+              EmoraRoutes.splash: (context) => const SplashScreen(),
+              EmoraRoutes.login: (context) => const LoginScreen(),
+              EmoraRoutes.signup: (context) => const SignUpScreen(),
+              EmoraRoutes.pairing: (context) => const PairingScreen(),
               EmoraRoutes.dashboard: (context) => const DashboardScreen(),
               EmoraRoutes.ventRoom: (context) => const VentRoomScreen(),
               EmoraRoutes.babySetup: (context) => const BabySetupScreen(),
               EmoraRoutes.vaccineTracker: (context) => const VaccineTrackerScreen(),
               EmoraRoutes.premiumPaywall: (context) => const PremiumPaywallScreen(),
+              EmoraRoutes.onboarding: (context) => const OnboardingScreen(),
+              EmoraRoutes.profileSetup: (context) => const ProfileSetupScreen(),
+            },
+            builder: (context, child) {
+              return BlocListener<AuthBloc, AuthState>(
+                listener: (context, state) {
+                  if (!GlobalAuthGuard.initialNavigationDone) return;
+
+                  if (state is AuthUnauthenticated) {
+                    navigatorKey.currentState?.pushNamedAndRemoveUntil(
+                      EmoraRoutes.login,
+                      (route) => false,
+                    );
+                  } else if (state is AuthSuccessNeedsProfileSetup) {
+                    navigatorKey.currentState?.pushNamedAndRemoveUntil(
+                      EmoraRoutes.profileSetup,
+                      (route) => false,
+                    );
+                  } else if (state is AuthSuccessUnpaired) {
+                    navigatorKey.currentState?.pushNamedAndRemoveUntil(
+                      EmoraRoutes.dashboard,
+                      (route) => false,
+                    );
+                  } else if (state is AuthSuccessPaired) {
+                    navigatorKey.currentState?.pushNamedAndRemoveUntil(
+                      EmoraRoutes.dashboard,
+                      (route) => false,
+                    );
+                  }
+                },
+                child: child!,
+              );
             },
           );
         },

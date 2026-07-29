@@ -24,6 +24,7 @@ class CalendarLoaded extends CalendarState {
   final String? myId;
   final String? partnerId;
   final String? coupleId;
+  final String myBioRole;
 
   const CalendarLoaded({
     required this.periodLogs,
@@ -33,6 +34,7 @@ class CalendarLoaded extends CalendarState {
     this.myId,
     this.partnerId,
     this.coupleId,
+    this.myBioRole = 'Other',
   });
 
   CalendarLoaded copyWith({
@@ -43,6 +45,7 @@ class CalendarLoaded extends CalendarState {
     String? myId,
     String? partnerId,
     String? coupleId,
+    String? myBioRole,
   }) {
     return CalendarLoaded(
       periodLogs: periodLogs ?? this.periodLogs,
@@ -52,6 +55,7 @@ class CalendarLoaded extends CalendarState {
       myId: myId ?? this.myId,
       partnerId: partnerId ?? this.partnerId,
       coupleId: coupleId ?? this.coupleId,
+      myBioRole: myBioRole ?? this.myBioRole,
     );
   }
 
@@ -175,6 +179,7 @@ class CalendarLoaded extends CalendarState {
         myId,
         partnerId,
         coupleId,
+        myBioRole,
       ];
 }
 

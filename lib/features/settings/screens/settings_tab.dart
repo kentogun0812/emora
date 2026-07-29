@@ -1,5 +1,7 @@
 // lib/features/settings/screens/settings_tab.dart
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/routes.dart';
@@ -8,9 +10,12 @@ import '../../auth/bloc/auth_bloc.dart';
 import '../../auth/bloc/auth_event.dart';
 import '../../pairing/bloc/pairing_bloc.dart';
 import '../../pairing/bloc/pairing_event.dart';
+import '../../pairing/bloc/pairing_state.dart';
 import '../../calendar/bloc/calendar_bloc.dart';
 import '../../calendar/bloc/calendar_event.dart';
 import '../../calendar/bloc/calendar_state.dart';
+import '../../dashboard/bloc/dashboard_bloc.dart';
+import '../widgets/profile_setup_sheet.dart';
 import '../bloc/theme_bloc.dart';
 import '../bloc/theme_event.dart';
 import '../bloc/theme_state.dart';
@@ -40,11 +45,38 @@ class _SettingsTabState extends State<SettingsTab> {
     }
   }
 
+  void _showLockedDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+          title: Row(
+            children: [
+              const Text('🔒 '),
+              Text(context.translate('baby.locked_title')),
+            ],
+          ),
+          content: Text(context.translate('baby.locked_desc')),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Đồng ý', style: TextStyle(fontWeight: FontWeight.bold)),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeState = context.watch<ThemeBloc>().state;
     final colors = themeState.themeColors;
     final isDark = themeState.themeName == 'Midnight Starlight';
+    final dashboardState = context.watch<DashboardBloc>().state;
+    final isMarried = dashboardState is DashboardLoaded && dashboardState.relationshipStatus == 'Married';
+    final isPaired = dashboardState is DashboardLoaded && dashboardState.isPaired;
 
     return BlocBuilder<CalendarBloc, CalendarState>(
       builder: (context, state) {
@@ -280,6 +312,78 @@ class _SettingsTabState extends State<SettingsTab> {
                   ),
                   const SizedBox(height: 28),
 
+                  // Bio-Role & Call Sign Settings Section
+                  Text(
+                    "Tài khoản & Đồng hành",
+                    style: TextStyle(
+                      fontFamily: 'Outfit',
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: colors.textDark,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: colors.surface,
+                      borderRadius: BorderRadius.circular(24),
+                      boxShadow: [
+                        BoxShadow(
+                          color: colors.primary.withOpacity(0.04),
+                          blurRadius: 16,
+                          offset: const Offset(0, 6),
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          leading: const Text('👤', style: TextStyle(fontSize: 22)),
+                          title: Text(
+                            context.translate('profile.setup_title'),
+                            style: TextStyle(fontWeight: FontWeight.bold, color: colors.textDark),
+                          ),
+                          subtitle: const Text("Cài đặt vai trò sinh học và danh xưng xưng hô thân mật", style: TextStyle(fontSize: 12)),
+                          trailing: Icon(Icons.arrow_forward_ios, size: 14, color: colors.textMuted),
+                          onTap: () {
+                            // Fetch current profile fields from DashboardBloc state if loaded
+                            final dashboardState = context.read<DashboardBloc>().state;
+                            String bioRole = 'Other';
+                            String callSign = '';
+                            String partnerCallSign = '';
+                            String relationshipStatus = 'Dating';
+                            String nickname = '';
+                            String dateOfBirth = '';
+                            if (dashboardState is DashboardLoaded) {
+                              bioRole = dashboardState.myBioRole;
+                              callSign = dashboardState.myCallSign;
+                              partnerCallSign = dashboardState.partnerCallSign;
+                              relationshipStatus = dashboardState.relationshipStatus;
+                              nickname = dashboardState.nickname;
+                              dateOfBirth = dashboardState.dateOfBirth;
+                            }
+                            showModalBottomSheet(
+                              context: context,
+                              backgroundColor: Colors.transparent,
+                              isScrollControlled: true,
+                              builder: (_) => ProfileSetupSheet(
+                                initialNickname: nickname,
+                                initialDateOfBirth: dateOfBirth,
+                                initialBioRole: bioRole,
+                                initialCallSign: callSign,
+                                initialPartnerCallSign: partnerCallSign,
+                                initialRelationshipStatus: relationshipStatus,
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 28),
+
                   // Cycle Parameters Section
                   Text(
                     "Cấu hình chu kỳ cá nhân",
@@ -379,7 +483,7 @@ class _SettingsTabState extends State<SettingsTab> {
                       fontFamily: 'Outfit',
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: colors.textDark,
+                      color: isMarried ? colors.textDark : Colors.grey,
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -387,7 +491,7 @@ class _SettingsTabState extends State<SettingsTab> {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color: colors.surface,
+                      color: isMarried ? colors.surface : colors.surface.withOpacity(0.6),
                       borderRadius: BorderRadius.circular(24),
                       boxShadow: [
                         BoxShadow(
@@ -400,28 +504,56 @@ class _SettingsTabState extends State<SettingsTab> {
                     child: Column(
                       children: [
                         ListTile(
-                          leading: const Text('👶', style: TextStyle(fontSize: 22)),
+                          leading: Text(isMarried ? '👶' : '🔒', style: const TextStyle(fontSize: 22)),
                           title: Text(
                             "Thiết lập hồ sơ bé yêu",
-                            style: TextStyle(fontWeight: FontWeight.bold, color: colors.textDark),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold, 
+                              color: isMarried ? colors.textDark : Colors.grey,
+                            ),
                           ),
-                          subtitle: const Text("Chỉnh sửa tên, giới tính và ngày sinh của bé", style: TextStyle(fontSize: 12)),
-                          trailing: Icon(Icons.arrow_forward_ios, size: 14, color: colors.textMuted),
+                          subtitle: Text(
+                            "Chỉnh sửa tên, giới tính và ngày sinh của bé", 
+                            style: TextStyle(fontSize: 12, color: isMarried ? colors.textMuted : Colors.grey.withOpacity(0.7)),
+                          ),
+                          trailing: Icon(
+                            isMarried ? Icons.arrow_forward_ios : Icons.lock_outline, 
+                            size: 14, 
+                            color: isMarried ? colors.textMuted : Colors.grey,
+                          ),
                           onTap: () {
-                            Navigator.pushNamed(context, EmoraRoutes.babySetup);
+                            if (!isMarried) {
+                              _showLockedDialog(context);
+                            } else {
+                              Navigator.pushNamed(context, EmoraRoutes.babySetup);
+                            }
                           },
                         ),
                         Divider(height: 1, color: colors.background),
                         ListTile(
-                          leading: const Text('💉', style: TextStyle(fontSize: 22)),
+                          leading: Text(isMarried ? '💉' : '🔒', style: const TextStyle(fontSize: 22)),
                           title: Text(
                             "Lịch tiêm chủng của bé",
-                            style: TextStyle(fontWeight: FontWeight.bold, color: colors.textDark),
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold, 
+                              color: isMarried ? colors.textDark : Colors.grey,
+                            ),
                           ),
-                          subtitle: const Text("Theo dõi tiến trình tiêm chủng vắc-xin", style: TextStyle(fontSize: 12)),
-                          trailing: Icon(Icons.arrow_forward_ios, size: 14, color: colors.textMuted),
+                          subtitle: Text(
+                            "Theo dõi tiến trình tiêm chủng vắc-xin", 
+                            style: TextStyle(fontSize: 12, color: isMarried ? colors.textMuted : Colors.grey.withOpacity(0.7)),
+                          ),
+                          trailing: Icon(
+                            isMarried ? Icons.arrow_forward_ios : Icons.lock_outline, 
+                            size: 14, 
+                            color: isMarried ? colors.textMuted : Colors.grey,
+                          ),
                           onTap: () {
-                            Navigator.pushNamed(context, EmoraRoutes.vaccineTracker);
+                            if (!isMarried) {
+                              _showLockedDialog(context);
+                            } else {
+                              Navigator.pushNamed(context, EmoraRoutes.vaccineTracker);
+                            }
                           },
                         ),
                       ],
@@ -517,23 +649,49 @@ class _SettingsTabState extends State<SettingsTab> {
                   ),
                   const SizedBox(height: 16),
 
-                  OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      foregroundColor: colors.primary,
-                      side: BorderSide(color: colors.primary, width: 1.5),
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(28),
+                  if (isPaired) ...[
+                    OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: colors.primary,
+                        side: BorderSide(color: colors.primary, width: 1.5),
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(28),
+                        ),
+                      ),
+                      onPressed: () {
+                        _showDisconnectConfirmationDialog(context, colors);
+                      },
+                      child: Text(
+                        context.translate('settings.disconnect'),
+                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    onPressed: () {
-                      _showDisconnectConfirmationDialog(context, colors);
-                    },
-                    child: Text(
-                      context.translate('settings.disconnect'),
-                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ] else ...[
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: colors.primary,
+                        foregroundColor: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(28),
+                        ),
+                        elevation: 0,
+                      ),
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          builder: (_) => _PairingSettingsSheet(colors: colors),
+                        );
+                      },
+                      child: const Text(
+                        "Kết nối cặp đôi",
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
                     ),
-                  ),
+                  ],
                   const SizedBox(height: 40),
                 ],
               ),
@@ -651,6 +809,256 @@ class _SettingsTabState extends State<SettingsTab> {
           ],
         );
       },
+    );
+  }
+}
+
+class _PairingSettingsSheet extends StatefulWidget {
+  final ThemeColors colors;
+  const _PairingSettingsSheet({Key? key, required this.colors}) : super(key: key);
+
+  @override
+  State<_PairingSettingsSheet> createState() => _PairingSettingsSheetState();
+}
+
+class _PairingSettingsSheetState extends State<_PairingSettingsSheet> with SingleTickerProviderStateMixin {
+  late TabController _tabController;
+  final TextEditingController _codeController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 2, vsync: this);
+    context.read<PairingBloc>().add(LoadPairingInfo());
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    _codeController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = widget.colors;
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.75,
+      decoration: BoxDecoration(
+        color: colors.surface,
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(32)),
+      ),
+      padding: EdgeInsets.only(
+        left: 24,
+        right: 24,
+        top: 24,
+        bottom: MediaQuery.of(context).viewInsets.bottom + 24,
+      ),
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Center(
+              child: Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: colors.secondary,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              context.translate('pairing.title'),
+              style: TextStyle(
+                fontFamily: 'Outfit',
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: colors.textDark,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 20),
+            Container(
+              decoration: BoxDecoration(
+                color: colors.secondary.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(28),
+              ),
+              child: TabBar(
+                controller: _tabController,
+                indicator: BoxDecoration(
+                  color: colors.primary,
+                  borderRadius: BorderRadius.circular(28),
+                ),
+                labelColor: Colors.white,
+                unselectedLabelColor: colors.textDark,
+                tabs: [
+                  Tab(icon: const Icon(Icons.share, size: 18), text: context.translate('pairing.tab_my_code')),
+                  Tab(icon: const Icon(Icons.link, size: 18), text: context.translate('pairing.tab_input_code')),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: BlocConsumer<PairingBloc, PairingState>(
+                listener: (context, state) {
+                  if (state is PairingSuccess) {
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(context.translate('pairing.success_connected')),
+                        backgroundColor: colors.primary,
+                      ),
+                    );
+                    context.read<AuthBloc>().add(AppStarted()); // Reload auth state
+                  }
+                },
+                builder: (context, state) {
+                  return TabBarView(
+                    controller: _tabController,
+                    children: [
+                      _buildMyCodeTab(state, colors),
+                      _buildInputCodeTab(state, colors),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMyCodeTab(PairingState state, ThemeColors colors) {
+    if (state is PairingLoading) {
+      return const Center(child: CircularProgressIndicator(color: EmoraColors.primary));
+    }
+
+    String code = '------';
+    if (state is PairingInfoLoaded) {
+      code = state.myCode;
+    }
+
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const SizedBox(height: 20),
+          Text(
+            context.translate('pairing.desc_your_code'),
+            style: TextStyle(fontSize: 14, color: colors.textMuted),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            code,
+            style: TextStyle(
+              fontSize: 44,
+              fontWeight: FontWeight.bold,
+              color: colors.primary,
+              letterSpacing: 6,
+            ),
+          ),
+          const SizedBox(height: 24),
+          ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: colors.primary,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              elevation: 0,
+            ),
+            onPressed: () {
+              Clipboard.setData(ClipboardData(text: code));
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Sao chép mã ghép đôi thành công!')),
+              );
+            },
+            icon: const Icon(Icons.copy),
+            label: Text(context.translate('pairing.share_btn')),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInputCodeTab(PairingState state, ThemeColors colors) {
+    final isConnecting = state is PairingConnecting;
+    final errorMessage = state is PairingFailure ? state.errorMessage : null;
+
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const SizedBox(height: 20),
+          Text(
+            context.translate('pairing.desc_input_code'),
+            style: TextStyle(fontSize: 14, color: colors.textMuted),
+          ),
+          const SizedBox(height: 20),
+          TextField(
+            controller: _codeController,
+            keyboardType: TextInputType.number,
+            maxLength: 6,
+            style: TextStyle(
+              fontSize: 24,
+              letterSpacing: 10,
+              color: colors.textDark,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+            decoration: InputDecoration(
+              counterText: "",
+              hintText: context.translate('pairing.input_placeholder'),
+              hintStyle: const TextStyle(fontSize: 15, letterSpacing: 1, color: EmoraColors.textMuted),
+              filled: true,
+              fillColor: colors.background,
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide(color: colors.secondary, width: 1.5),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide(color: colors.primary, width: 2.0),
+              ),
+            ),
+          ),
+          if (errorMessage != null) ...[
+            const SizedBox(height: 12),
+            Text(
+              errorMessage.startsWith('pairing.') ? context.translate(errorMessage) : errorMessage,
+              style: const TextStyle(color: EmoraColors.primary, fontSize: 13),
+              textAlign: TextAlign.center,
+            ),
+          ],
+          const SizedBox(height: 28),
+          if (isConnecting)
+            const CircularProgressIndicator(color: EmoraColors.primary)
+          else
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: colors.primary,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                elevation: 0,
+              ),
+              onPressed: () {
+                final code = _codeController.text.trim();
+                if (code.length == 6) {
+                  context.read<PairingBloc>().add(ConnectRequested(code));
+                }
+              },
+              child: Text(
+                context.translate('pairing.connect_btn'),
+                style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

@@ -65,3 +65,24 @@ class CareRequestsUpdated extends DashboardEvent {
   @override
   List<Object?> get props => [requests];
 }
+
+class UpdateProfile extends DashboardEvent {
+  final String nickname;
+  final DateTime dateOfBirth;
+  final String bioRole;
+  final String callSign;
+  final String partnerCallSign;
+  final String relationshipStatus;
+
+  const UpdateProfile({
+    required this.nickname,
+    required this.dateOfBirth,
+    required this.bioRole,
+    required this.callSign,
+    required this.partnerCallSign,
+    required this.relationshipStatus,
+  });
+
+  @override
+  List<Object?> get props => [nickname, dateOfBirth, bioRole, callSign, partnerCallSign, relationshipStatus];
+}

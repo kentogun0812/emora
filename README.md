@@ -84,6 +84,14 @@ flutter test
 *   **Nguyên nhân:** Đăng nhập Google/Apple OAuth thất bại do chưa cấu hình Redirect URL.
 *   **Khắc phục:** Đảm bảo bạn đã thêm địa chỉ callback `io.supabase.emora://login-callback` vào cấu hình **Authentication -> Redirect URLs** trên trang Supabase Dashboard của bạn.
 
+### Lỗi "Unsupported provider: provider is not enabled"
+*   **Nguyên nhân:** Nhà cung cấp dịch vụ đăng nhập (Google/Apple) chưa được kích hoạt trong trang quản trị Supabase.
+*   **Khắc phục:**
+    1. Đăng nhập vào **Supabase Dashboard** -> Chọn dự án của bạn.
+    2. Đi tới **Authentication** -> **Providers**.
+    3. Tìm **Google** (hoặc **Apple**) và chuyển trạng thái sang **Enabled** (ON).
+    4. Cấu hình các trường bắt buộc như `Client ID` và `Client Secret` (lấy từ Google Cloud Console) rồi nhấn **Save**.
+
 ### Không tìm thấy file Localization (Đa ngôn ngữ)
 *   **Nguyên nhân:** Lỗi thiếu tài nguyên i18n JSON khi build app.
 *   **Khắc phục:** Hãy đảm bảo cấu trúc thư mục chứa các tệp ngôn ngữ tồn tại chính xác tại đầu ra: `assets/i18n/vn.json`, `assets/i18n/en.json`, `assets/i18n/ko.json`, `assets/i18n/jp.json` và đã được khai báo trong phần `assets` của tệp `pubspec.yaml`.

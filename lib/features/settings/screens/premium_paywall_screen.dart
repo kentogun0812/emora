@@ -166,7 +166,7 @@ class _PremiumPaywallScreenState extends State<PremiumPaywallScreen> {
                       "EMORA PREMIUM",
                       style: TextStyle(
                         fontSize: 28,
-                        fontWeight: FontWeight.black,
+                        fontWeight: FontWeight.w900,
                         letterSpacing: 2,
                         color: colors.textDark,
                       ),

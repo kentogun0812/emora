@@ -7,6 +7,7 @@ import '../../../core/utils/localization.dart';
 import '../bloc/baby_bloc.dart';
 import '../bloc/baby_event.dart';
 import '../bloc/baby_state.dart';
+import '../../dashboard/bloc/dashboard_bloc.dart';
 
 class BabySetupScreen extends StatefulWidget {
   const BabySetupScreen({super.key});
@@ -27,6 +28,41 @@ class _BabySetupScreenState extends State<BabySetupScreen> {
   @override
   void initState() {
     super.initState();
+
+    // Check relationship status restriction
+    final dashboardState = context.read<DashboardBloc>().state;
+    final isMarried = dashboardState is DashboardLoaded && dashboardState.relationshipStatus == 'Married';
+    if (!isMarried) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (dialogCtx) {
+            return AlertDialog(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+              title: Row(
+                children: [
+                  const Text('🔒 '),
+                  Text(context.translate('baby.locked_title')),
+                ],
+              ),
+              content: Text(context.translate('baby.locked_desc')),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(dialogCtx);
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Đồng ý', style: TextStyle(fontWeight: FontWeight.bold)),
+                ),
+              ],
+            );
+          },
+        );
+      });
+      return;
+    }
+
     // Pre-populate if baby profile already exists
     final babyState = context.read<BabyBloc>().state;
     if (babyState is BabyLoaded && babyState.babyProfile != null) {

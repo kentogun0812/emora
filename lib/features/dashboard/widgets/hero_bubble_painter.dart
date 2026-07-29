@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 class HeroBubble extends StatefulWidget {
   final Color bubbleColor;
   final Widget child;
+  final double size;
 
   const HeroBubble({
     Key? key,
     required this.bubbleColor,
     required this.child,
+    this.size = 180.0,
   }) : super(key: key);
 
   @override
@@ -46,8 +48,8 @@ class _HeroBubbleState extends State<HeroBubble> with SingleTickerProviderStateM
             bubbleColor: widget.bubbleColor,
           ),
           child: SizedBox(
-            width: 180,
-            height: 180,
+            width: widget.size,
+            height: widget.size,
             child: widget.child,
           ),
         );

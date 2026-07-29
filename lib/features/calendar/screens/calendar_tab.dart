@@ -262,8 +262,12 @@ class _CalendarTabState extends State<CalendarTab> {
                               Expanded(
                                 child: ElevatedButton.icon(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: EmoraColors.secondary,
-                                    foregroundColor: EmoraColors.primary,
+                                    backgroundColor: state.myBioRole == 'Male'
+                                        ? Colors.grey.shade200
+                                        : EmoraColors.secondary,
+                                    foregroundColor: state.myBioRole == 'Male'
+                                        ? Colors.grey.shade400
+                                        : EmoraColors.primary,
                                     elevation: 0,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(20),
@@ -275,37 +279,46 @@ class _CalendarTabState extends State<CalendarTab> {
                                     context.translate('calendar.period_log'),
                                     style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
                                   ),
-                                  onPressed: () {
-                                    // Open period log sheet
-                                    DateTime? existingEnd;
-                                    final match = state.periodLogs.firstWhere(
-                                      (log) => log['start_date'] == _selectedDay.toIso8601String().split('T')[0],
-                                      orElse: () => {},
-                                    );
-                                    if (match.isNotEmpty && match['end_date'] != null) {
-                                      existingEnd = DateTime.parse(match['end_date']);
-                                    }
-
-                                    showModalBottomSheet(
-                                      context: context,
-                                      backgroundColor: Colors.transparent,
-                                      builder: (_) => PeriodLogSheet(
-                                        initialDate: _selectedDay,
-                                        existingEndDate: existingEnd,
-                                        onSave: (start, end) {
-                                          context.read<CalendarBloc>().add(
-                                                SavePeriod(startDate: start, endDate: end),
-                                              );
+                                  onPressed: state.myBioRole == 'Male'
+                                      ? () {
                                           ScaffoldMessenger.of(context).showSnackBar(
                                             SnackBar(
-                                              content: Text(context.translate('calendar.success_save')),
-                                              backgroundColor: EmoraColors.primary,
+                                              content: Text(context.translate('profile.cycle_locked_msg')),
+                                              backgroundColor: Colors.redAccent,
+                                            ),
+                                          );
+                                        }
+                                      : () {
+                                          // Open period log sheet
+                                          DateTime? existingEnd;
+                                          final match = state.periodLogs.firstWhere(
+                                            (log) => log['start_date'] == _selectedDay.toIso8601String().split('T')[0],
+                                            orElse: () => {},
+                                          );
+                                          if (match.isNotEmpty && match['end_date'] != null) {
+                                            existingEnd = DateTime.parse(match['end_date']);
+                                          }
+
+                                          showModalBottomSheet(
+                                            context: context,
+                                            backgroundColor: Colors.transparent,
+                                            builder: (_) => PeriodLogSheet(
+                                              initialDate: _selectedDay,
+                                              existingEndDate: existingEnd,
+                                              onSave: (start, end) {
+                                                context.read<CalendarBloc>().add(
+                                                      SavePeriod(startDate: start, endDate: end),
+                                                    );
+                                                ScaffoldMessenger.of(context).showSnackBar(
+                                                  SnackBar(
+                                                    content: Text(context.translate('calendar.success_save')),
+                                                    backgroundColor: EmoraColors.primary,
+                                                  ),
+                                                );
+                                              },
                                             ),
                                           );
                                         },
-                                      ),
-                                    );
-                                  },
                                 ),
                               ),
                               const SizedBox(width: 12),

@@ -18,6 +18,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
   // Local storage for mock bypass mode
   final List<Map<String, dynamic>> _mockPeriodLogs = [];
   final List<Map<String, dynamic>> _mockJournalEntries = [];
+  String _mockMyBioRole = 'Other';
   final Map<String, dynamic> _mockMySettings = {
     'avg_cycle_length': 28,
     'avg_period_length': 5,
@@ -93,6 +94,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
           myId: null,
           partnerId: null,
           coupleId: null,
+          myBioRole: _mockMyBioRole,
         ));
         return;
       }
@@ -100,12 +102,13 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
       // Fetch user profile info
       final myProfile = await _client
           .from('users')
-          .select('couple_id, partner_id')
+          .select('couple_id, partner_id, bio_role')
           .eq('id', myId)
           .single();
 
       final coupleId = myProfile['couple_id'] as String?;
       final partnerId = myProfile['partner_id'] as String?;
+      final myBioRole = myProfile['bio_role'] as String? ?? 'Other';
 
       // 1. Fetch/Initialize my cycle settings
       Map<String, dynamic>? mySettings;
@@ -206,6 +209,7 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
         myId: myId,
         partnerId: partnerId,
         coupleId: coupleId,
+        myBioRole: myBioRole,
       ));
     } catch (e) {
       emit(CalendarFailure(e.toString()));

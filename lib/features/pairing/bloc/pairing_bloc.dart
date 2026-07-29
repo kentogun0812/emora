@@ -99,6 +99,7 @@ class PairingBloc extends Bloc<PairingEvent, PairingState> {
             'user_a_id': creatorId,
             'user_b_id': currentUserId,
             'status': 'Connected',
+            'relationship_status': 'Dating',
           })
           .select('id')
           .single();

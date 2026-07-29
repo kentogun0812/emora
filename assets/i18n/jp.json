@@ -4,9 +4,20 @@
   "login": {
     "welcome": "エモラへようこそ",
     "desc": "静かなタップと温かい繋がりを通じて、お互いをより深く理解しましょう。",
-    "sign_in_google": "Googleでサインイン",
     "sign_in_apple": "Appleでサインイン",
-    "error_failed": "サインインに失敗しました。もう一度お試しください！"
+    "error_failed": "サインインに失敗しました。もう一度お試しください！",
+    "email_hint": "メールアドレスを入力してください",
+    "send_otp": "ログインコードを送信",
+    "otp_hint": "認証コードを入力",
+    "verify_otp": "認証してログイン",
+    "otp_sent_to": "認証コードは {email} 宛てに送信されました",
+    "back_to_email": "メールアドレスを変更",
+    "resend_otp": "コードを再送信",
+    "resend_wait": "{seconds}秒後に再送信",
+    "invalid_email": "無効なメールアドレスです",
+    "invalid_otp": "有効な認証コードを入力してください",
+    "error_invalid_otp": "認証コードが正しくないか、期限切れです。もう一度お試しください！",
+    "error_user_not_found": "アカウントが存在しません。まず新規登録を行ってください。"
   },
   "pairing": {
     "title": "デバイスのペアリング",
@@ -21,7 +32,17 @@
     "or_scan_qr": "またはQRコードをスキャン",
     "error_invalid_code": "無効なコードか、有効期限が切れています！",
     "error_self_code": "自分自身のコードとは接続できません！",
-    "success_connected": "ペアリングが正常に完了しました！"
+    "success_connected": "ペアリングが正常に完了しました！",
+    "female_onboarding_title": "カップル接続",
+    "female_onboarding_desc": "彼氏や旦那さんと接続して、Emoraのすべての機能を利用しましょう。パートナーのペアリングコードを入力して連携します。この設定は後で設定画面から行うこともできます。",
+    "pair_now": "今すぐ接続",
+    "later": "後で",
+    "male_lock_title": "接続を待機中",
+    "male_lock_desc": "パートナーと接続されると、アプリのロックが解除されます。",
+    "male_lock_guide": "接続を開始するために、このペアリングコードを女性のパートナーに送信してください。",
+    "copy_code": "コードをコピー",
+    "share_code": "コードを共有",
+    "logout": "ログアウト"
   },
   "common": {
     "error_network": "ネットワークエラーが発生しました。もう一度お試しください！",
@@ -128,7 +149,9 @@
     "status": "ステータス",
     "notes_placeholder": "メモを入力 (発熱、医療機関など...)",
     "not_set": "記録なし",
-    "success_save": "赤ちゃん情報を正常に保存しました！"
+    "success_save": "赤ちゃん情報を正常に保存しました！",
+    "locked_title": "機能ロック",
+    "locked_desc": "赤ちゃん管理機能は既婚カップルのみ利用可能です。設定で関係ステータスを更新してください。"
   },
   "premium": {
     "title": "Emoraプレミアム",
@@ -145,5 +168,83 @@
     "limit_reached_title": "本日の上限に達しました",
     "limit_reached_desc": "本日の無料分である5回のプレイアクションをすべて消費しました。続けるにはプレミアムにアップグレードしてください！",
     "upgrade_now": "今すぐアップグレード"
+  },
+  "profile": {
+    "setup_title": "役割と呼び名の設定",
+    "bio_role": "あなたの役割",
+    "bio_role_female": "女性 (生理周期の記録)",
+    "bio_role_male": "男性 (生理概要の閲覧)",
+    "bio_role_other": "その他 / 未指定",
+    "call_sign": "あなたの呼び名",
+    "call_sign_hint": "パートナーがあなたを呼ぶ名前 (例: お兄ちゃん、パパ)",
+    "partner_call_sign": "パートナーの呼び名",
+    "partner_call_sign_hint": "あなたがパートナーを呼ぶ名前 (例: ハニー、ダーリン)",
+    "success_save": "カップルプロフィールを更新しました！",
+    "cycle_locked_msg": "生理周期の記録は女性の役割のみ利用可能です。",
+    "relationship_status": "関係ステータス",
+    "status_dating": "交際中",
+    "status_married": "既婚"
+  },
+  "empathy": {
+    "title": "共感のヒント",
+    "pms_hint": "{partner}はもうすぐ生理予定日です（敏感な時期）。家事を手伝ったり、温かい生姜湯を入れてあげましょう！ ☕❤️",
+    "period_hint": "{partner}は現在生理中です。気遣いを示し、温かいお湯を用意してあげましょう！ 🌸",
+    "tired_hint": "{partner}は疲れています。優しく抱きしめたり、家事を手伝ったりしてください！ 🤗",
+    "irritated_hint": "{partner}はイライラしています。辛抱強く接し、甘いメッセージを送ってあげましょう！ 💕",
+    "sad_hint": "{partner}は悲しんでいます。話を聞いて、美味しい食べ物で驚かせてあげましょう！ 🍜",
+    "default_hint": "バブルをダブルタップして、{partner}に愛の振動（ナッジ）を送りましょう！"
+  },
+  "onboarding": {
+    "title_1": "感情をシェアする",
+    "desc_1": "言葉がなくても、タップや愛のナッジで簡単に自分の気持ちを伝え合えます。",
+    "title_2": "健康に寄り添う",
+    "desc_2": "パートナーの生理周期や排卵期を確認し、もっと深く理解しサポートしましょう。",
+    "title_3": "温かい繋がり",
+    "desc_3": "おねだりケアを送信したり、楽しい交流をしたり、共同日記で特別な瞬間を残せます。",
+    "btn_continue": "続ける",
+    "btn_start": "スタート",
+    "btn_skip": "スキップ"
+  },
+  "signup": {
+    "welcome": "Emoraアカウントを作成",
+    "desc": "パートナーと繋がるためにアカウントを作成してください。",
+    "send_otp": "登録コードを送信",
+    "otp_hint": "認証コードを入力",
+    "verify_otp": "認証して新規登録",
+    "otp_sent_to": "登録用の認証コードが {email} に送信されました",
+    "back_to_email": "メールアドレスを変更",
+    "already_have_account": "アカウントをお持ちですか？ログイン",
+    "dont_have_account": "アカウントをお持ちでないですか？新規登録",
+    "invalid_otp": "有効な認証コードを入力してください",
+    "error_invalid_otp": "認証コードが正しくないか、期限切れです。もう一度お試しください！",
+    "sign_up_apple": "Appleで新規登録"
+  },
+  "profile_setup": {
+    "title": "プロフィール設定",
+    "subtitle": "カップルとしての体験をパーソナライズするために、初期情報を入力してください。",
+    "nickname": "あなたのニックネーム",
+    "nickname_hint": "ニックネームを入力 (例: ハニー、ダーリン...)",
+    "nickname_required": "ニックネームは必須です",
+    "dob": "あなたの生年月日",
+    "dob_hint": "生年月日を選択",
+    "dob_required": "生年月日は必須です",
+    "gender": "生物学的性別",
+    "gender_male": "男性",
+    "gender_female": "女性",
+    "gender_required": "性別は必須です",
+    "relationship": "関係ステータス",
+    "relationship_dating": "交際中",
+    "relationship_married": "既婚",
+    "relationship_required": "関係ステータスは必須です",
+    "submit": "はじめる",
+    "saving": "保存中..."
+  },
+  "widget": {
+    "title": "カップルウィジェット",
+    "quick_mood": "クイック気分更新",
+    "action_accept": "引き受ける",
+    "action_complete": "完了",
+    "action_done": "完了済み",
+    "status_updated": "ステータスが更新されました！"
   }
 }

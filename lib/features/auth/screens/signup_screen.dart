@@ -1,23 +1,24 @@
-// lib/features/auth/screens/login_screen.dart
+// lib/features/auth/screens/signup_screen.dart
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:supabase_flutter/supabase_flutter.dart' hide AuthState;
 import '../../../core/constants/colors.dart';
 import '../../../core/constants/routes.dart';
 import '../../../core/utils/localization.dart';
 import '../bloc/auth_bloc.dart';
 import '../bloc/auth_event.dart';
 import '../bloc/auth_state.dart';
-import 'signup_screen.dart';
+import 'login_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _otpController = TextEditingController();
@@ -65,10 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
               state.errorMessage.contains('invalid token') || 
               state.errorMessage.contains('incorrect') ||
               state.errorMessage.toLowerCase().contains('otp')) {
-            errorMsg = context.translate('login.error_invalid_otp');
-          } else if (state.errorMessage.contains('Signups not allowed') || 
-                     state.errorMessage.contains('User not found')) {
-            errorMsg = context.translate('login.error_user_not_found');
+            errorMsg = context.translate('signup.error_invalid_otp');
           }
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -194,7 +192,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Text(
-                                context.translate('login.welcome'),
+                                context.translate('signup.welcome'),
                                 style: const TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.bold,
@@ -204,7 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               const SizedBox(height: 10),
                               Text(
-                                context.translate('login.desc'),
+                                context.translate('signup.desc'),
                                 style: const TextStyle(
                                   fontSize: 14,
                                   color: EmoraColors.textMuted,
@@ -225,7 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               else if (isOtpSent) ...[
                                 // Waiting for OTP view
                                 Text(
-                                  context.translate('login.otp_sent_to').replaceAll('{email}', currentEmail),
+                                  context.translate('signup.otp_sent_to').replaceAll('{email}', currentEmail),
                                   style: const TextStyle(fontSize: 13, color: EmoraColors.textMuted),
                                   textAlign: TextAlign.center,
                                 ),
@@ -254,7 +252,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                   validator: (val) {
                                     if (val == null || val.trim().isEmpty || int.tryParse(val.trim()) == null) {
-                                      return context.translate('login.invalid_otp');
+                                      return context.translate('signup.invalid_otp');
                                     }
                                     return null;
                                   },
@@ -275,11 +273,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                       context.read<AuthBloc>().add(VerifyOtpRequested(
                                         currentEmail,
                                         _otpController.text.trim(),
+                                        type: OtpType.signup,
                                       ));
                                     }
                                   },
                                   child: Text(
-                                    context.translate('login.verify_otp'),
+                                    context.translate('signup.verify_otp'),
                                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -293,7 +292,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         _otpController.clear();
                                       },
                                       child: Text(
-                                        context.translate('login.back_to_email'),
+                                        context.translate('signup.back_to_email'),
                                         style: const TextStyle(color: EmoraColors.primary, fontWeight: FontWeight.w600),
                                       ),
                                     ),
@@ -302,7 +301,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           ? () {
                                               context.read<AuthBloc>().add(SendOtpRequested(
                                                 currentEmail,
-                                                shouldCreateUser: false,
+                                                shouldCreateUser: true,
                                               ));
                                             }
                                           : null,
@@ -319,7 +318,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ],
                                 ),
                               ] else ...[
-                                // Email login view
+                                // Email signup view
                                 TextFormField(
                                   controller: _emailController,
                                   keyboardType: TextInputType.emailAddress,
@@ -358,12 +357,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                     if (_formKey.currentState!.validate()) {
                                       context.read<AuthBloc>().add(SendOtpRequested(
                                         _emailController.text.trim(),
-                                        shouldCreateUser: false,
+                                        shouldCreateUser: true,
                                       ));
                                     }
                                   },
                                   child: Text(
-                                    context.translate('login.send_otp'),
+                                    context.translate('signup.send_otp'),
                                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -382,9 +381,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ],
                                 ),
                                 const SizedBox(height: 20),
-                                 _buildOAuthButton(
+                                _buildOAuthButton(
                                   context: context,
-                                  label: context.translate('login.sign_in_apple'),
+                                  label: context.translate('signup.sign_up_apple'),
                                   iconPath: 'assets/icons/apple.png',
                                   onPressed: () {
                                     context.read<AuthBloc>().add(LoginRequestedApple());
@@ -397,7 +396,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       Navigator.pushReplacement(
                                         context,
                                         PageRouteBuilder(
-                                          pageBuilder: (context, animation, secondaryAnimation) => const SignUpScreen(),
+                                          pageBuilder: (context, animation, secondaryAnimation) => const LoginScreen(),
                                           transitionsBuilder: (context, animation, secondaryAnimation, child) {
                                             return FadeTransition(opacity: animation, child: child);
                                           },
@@ -406,7 +405,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       );
                                     },
                                     child: Text(
-                                      context.translate('signup.dont_have_account'),
+                                      context.translate('signup.already_have_account'),
                                       style: const TextStyle(
                                         color: EmoraColors.primary,
                                         fontWeight: FontWeight.bold,

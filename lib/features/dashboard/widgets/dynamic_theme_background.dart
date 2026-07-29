@@ -253,24 +253,24 @@ class _ThemeBackgroundPainter extends CustomPainter {
   // Draw Heart
   void _drawHeart(Canvas canvas, Offset center, double size, Paint paint) {
     final Path path = Path();
-    path.moveTo(center.dx, center.y + size * 0.35);
+    path.moveTo(center.dx, center.dy + size * 0.35);
     // Left curve
     path.cubicTo(
       center.dx - size * 0.5,
-      center.y - size * 0.15,
+      center.dy - size * 0.15,
       center.dx - size * 0.9,
-      center.y + size * 0.4,
+      center.dy + size * 0.4,
       center.dx,
-      center.y + size * 1.0,
+      center.dy + size * 1.0,
     );
     // Right curve
     path.cubicTo(
       center.dx + size * 0.9,
-      center.y + size * 0.4,
+      center.dy + size * 0.4,
       center.dx + size * 0.5,
-      center.y - size * 0.15,
+      center.dy - size * 0.15,
       center.dx,
-      center.y + size * 0.35,
+      center.dy + size * 0.35,
     );
     canvas.drawPath(path, paint);
   }
@@ -278,7 +278,7 @@ class _ThemeBackgroundPainter extends CustomPainter {
   // Draw Leaf
   void _drawLeaf(Canvas canvas, Offset center, double size, double rotation, Paint paint) {
     canvas.save();
-    canvas.translate(center.dx, center.y);
+    canvas.translate(center.dx, center.dy);
     canvas.rotate(rotation);
     final Path path = Path();
     path.moveTo(0, -size);
@@ -291,7 +291,7 @@ class _ThemeBackgroundPainter extends CustomPainter {
   // Draw Petal
   void _drawPetal(Canvas canvas, Offset center, double size, double rotation, Paint paint) {
     canvas.save();
-    canvas.translate(center.dx, center.y);
+    canvas.translate(center.dx, center.dy);
     canvas.rotate(rotation);
     final Path path = Path();
     path.moveTo(0, -size);
@@ -304,11 +304,11 @@ class _ThemeBackgroundPainter extends CustomPainter {
   // Draw Twinkling Sparkle Star
   void _drawStar(Canvas canvas, Offset center, double size, Paint paint) {
     final Path path = Path();
-    path.moveTo(center.dx, center.y - size);
-    path.quadraticBezierTo(center.dx, center.y, center.dx + size, center.y);
-    path.quadraticBezierTo(center.dx, center.y, center.dx, center.y + size);
-    path.quadraticBezierTo(center.dx, center.y, center.dx - size, center.y);
-    path.quadraticBezierTo(center.dx, center.y, center.dx, center.y - size);
+    path.moveTo(center.dx, center.dy - size);
+    path.quadraticBezierTo(center.dx, center.dy, center.dx + size, center.dy);
+    path.quadraticBezierTo(center.dx, center.dy, center.dx, center.dy + size);
+    path.quadraticBezierTo(center.dx, center.dy, center.dx - size, center.dy);
+    path.quadraticBezierTo(center.dx, center.dy, center.dx, center.dy - size);
     canvas.drawPath(path, paint);
   }
 

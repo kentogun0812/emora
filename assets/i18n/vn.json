@@ -4,9 +4,20 @@
   "login": {
     "welcome": "Chào mừng bạn đến với Emora",
     "desc": "Kết nối và thấu hiểu đối phương thông qua những chạm tương tác thầm lặng.",
-    "sign_in_google": "Đăng nhập với Google",
     "sign_in_apple": "Đăng nhập với Apple",
-    "error_failed": "Đăng nhập thất bại. Vui lòng thử lại!"
+    "error_failed": "Đăng nhập thất bại. Vui lòng thử lại!",
+    "email_hint": "Nhập địa chỉ email của bạn",
+    "send_otp": "Gửi mã đăng nhập",
+    "otp_hint": "Nhập mã xác thực",
+    "verify_otp": "Xác nhận & Đăng nhập",
+    "otp_sent_to": "Mã xác thực đã được gửi đến {email}",
+    "back_to_email": "Thay đổi email",
+    "resend_otp": "Gửi lại mã",
+    "resend_wait": "Gửi lại sau {seconds}s",
+    "invalid_email": "Email không hợp lệ",
+    "invalid_otp": "Vui lòng nhập mã xác thực hợp lệ",
+    "error_invalid_otp": "Mã xác thực không chính xác hoặc đã hết hạn. Vui lòng thử lại!",
+    "error_user_not_found": "Tài khoản không tồn tại. Vui lòng đăng ký tài khoản mới!"
   },
   "pairing": {
     "title": "Ghép đôi hai người",
@@ -21,7 +32,17 @@
     "or_scan_qr": "Hoặc quét mã QR",
     "error_invalid_code": "Mã ghép đôi không hợp lệ hoặc đã hết hạn!",
     "error_self_code": "Không thể kết nối với mã của chính bạn!",
-    "success_connected": "Kết nối cặp đôi thành công!"
+    "success_connected": "Kết nối cặp đôi thành công!",
+    "female_onboarding_title": "Kết nối cặp đôi",
+    "female_onboarding_desc": "Kết nối với người yêu/chồng để sử dụng đầy đủ tính năng của Emora. Nhập Pair Code của partner để liên kết. Bạn có thể thực hiện liên kết sau trong phần Cài đặt.",
+    "pair_now": "Kết nối ngay",
+    "later": "Để sau",
+    "male_lock_title": "Chờ kết nối từ đối phương",
+    "male_lock_desc": "Ứng dụng sẽ được mở khóa sau khi bạn được liên kết với partner.",
+    "male_lock_guide": "Hãy gửi mã ghép đôi này cho partner nữ của bạn để bắt đầu liên kết nhé.",
+    "copy_code": "Sao chép mã",
+    "share_code": "Chia sẻ mã",
+    "logout": "Đăng xuất"
   },
   "common": {
     "error_network": "Lỗi kết nối mạng. Vui lòng thử lại!",
@@ -101,6 +122,38 @@
     "pop_balloon": "❤️ Bạn đã vỡ quả bóng!",
     "balloon_message": "Gửi yêu thương!"
   },
+  "premium": {
+    "title": "Emora Premium",
+    "desc": "Mở khóa những trải nghiệm tuyệt vời cùng đối phương",
+    "features_theme": "Bộ sưu tập 4 Giao diện & Hình nền động độc đáo",
+    "features_vent": "Giải tỏa không giới hạn trong Phòng Vui Vẻ",
+    "features_ads": "Không quảng cáo, không bị gián đoạn",
+    "upgrade_btn": "Nâng cấp thử nghiệm (Miễn phí)",
+    "trial_desc": "Thanh toán giả lập để thử nghiệm tính năng",
+    "success_title": "Nâng cấp thành công",
+    "success_desc": "Chúc mừng! Bạn đã mở khóa toàn bộ đặc quyền Premium.",
+    "close": "Đóng",
+    "processing": "Đang xử lý giao dịch...",
+    "limit_reached_title": "Hạn mức hôm nay đã hết",
+    "limit_reached_desc": "Bạn đã sử dụng hết 5 lượt chọc ghẹo miễn phí trong ngày hôm nay. Hãy nâng cấp Premium để tiếp tục!",
+    "upgrade_now": "Nâng cấp ngay"
+  },
+  "profile": {
+    "setup_title": "Thiết lập Vai trò & Danh xưng",
+    "bio_role": "Vai trò của bạn",
+    "bio_role_female": "Nữ (Theo dõi chu kỳ)",
+    "bio_role_male": "Nam (Xem tóm tắt chu kỳ)",
+    "bio_role_other": "Khác / Không xác định",
+    "call_sign": "Danh xưng trong app",
+    "call_sign_hint": "Tên đối phương gọi bạn (vd: Anh, Em...)",
+    "partner_call_sign": "Danh xưng đối phương",
+    "partner_call_sign_hint": "Bạn gọi đối phương là (vd: Bé yêu, Vợ yêu...)",
+    "success_save": "Đã cập nhật hồ sơ cặp đôi!",
+    "cycle_locked_msg": "Tính năng ghi nhận chu kỳ chỉ khả dụng cho vai trò Nữ.",
+    "relationship_status": "Trạng thái quan hệ",
+    "status_dating": "Đang hẹn hò",
+    "status_married": "Đã kết hôn"
+  },
   "baby": {
     "title": "Góc Bé Yêu",
     "setup_title": "Tạo Hồ Sơ Bé Yêu",
@@ -128,22 +181,70 @@
     "status": "Trạng thái",
     "notes_placeholder": "Nhập ghi chú (nhiệt độ sốt, cơ sở y tế...)",
     "not_set": "Chưa cập nhật",
-    "success_save": "Lưu thông tin thành công!"
+    "success_save": "Lưu thông tin thành công!",
+    "locked_title": "Tính năng đã khóa",
+    "locked_desc": "Tính năng Trợ lý Mẹ & Bé chỉ dành cho các cặp đôi đã kết hôn. Vui lòng cập nhật trạng thái mối quan hệ của bạn trong mục cài đặt để mở khóa."
   },
-  "premium": {
-    "title": "Emora Premium",
-    "desc": "Mở khóa những trải nghiệm tuyệt vời cùng đối phương",
-    "features_theme": "Bộ sưu tập 4 Giao diện & Hình nền động độc đáo",
-    "features_vent": "Giải tỏa không giới hạn trong Phòng Vui Vẻ",
-    "features_ads": "Không quảng cáo, không bị gián đoạn",
-    "upgrade_btn": "Nâng cấp thử nghiệm (Miễn phí)",
-    "trial_desc": "Thanh toán giả lập để thử nghiệm tính năng",
-    "success_title": "Nâng cấp thành công",
-    "success_desc": "Chúc mừng! Bạn đã mở khóa toàn bộ đặc quyền Premium.",
-    "close": "Đóng",
-    "processing": "Đang xử lý giao dịch...",
-    "limit_reached_title": "Hạn mức hôm nay đã hết",
-    "limit_reached_desc": "Bạn đã sử dụng hết 5 lượt chọc ghẹo miễn phí trong ngày hôm nay. Hãy nâng cấp Premium để tiếp tục!",
-    "upgrade_now": "Nâng cấp ngay"
+  "empathy": {
+    "title": "Gợi ý Thấu hiểu",
+    "pms_hint": "{partner} sắp đến ngày chu kỳ kinh nguyệt (giai đoạn nhạy cảm). Hãy chủ động làm việc nhà hoặc pha trà gừng cho {partner} nhé! ☕❤️",
+    "period_hint": "{partner} đang trong ngày hành kinh. Hãy quan tâm, hỏi han và chuẩn bị nước ấm cho {partner} nhé! 🌸",
+    "tired_hint": "{partner} đang cảm thấy mệt mỏi. Hãy gửi một cái ôm thật chặt hoặc làm giúp việc nhà nhé! 🤗",
+    "irritated_hint": "{partner} đang cảm thấy bực mình. Hãy kiên nhẫn, tránh tranh cãi và gửi những lời quan tâm ngọt ngào nhé! 💕",
+    "sad_hint": "{partner} đang buồn. Hãy lắng nghe và chuẩn bị một món ăn ngon bất ngờ cho {partner} nhé! 🍜",
+    "default_hint": "Hãy double-tap bong bóng để gửi rung động yêu thương đến {partner} ngay hôm nay!"
+  },
+  "onboarding": {
+    "title_1": "Chia sẻ cảm xúc",
+    "desc_1": "Biểu đạt cảm xúc và gửi những Rung động yêu thương thầm lặng tới đối phương không cần lời nói.",
+    "title_2": "Đồng hành sức khỏe",
+    "desc_2": "Theo dõi chu kỳ sinh học, cửa sổ thụ thai của đối phương để cùng thấu hiểu và sẻ chia chu đáo hơn.",
+    "title_3": "Gắn kết ngọt ngào",
+    "desc_3": "Gửi yêu cầu chăm sóc tức thì, tương tác vui vẻ và lưu giữ những khoảnh khắc đẹp qua nhật ký chung.",
+    "btn_continue": "Tiếp tục",
+    "btn_start": "Bắt đầu ngay",
+    "btn_skip": "Bỏ qua"
+  },
+  "signup": {
+    "welcome": "Đăng ký tài khoản Emora",
+    "desc": "Đăng ký tài khoản Emora để bắt đầu kết nối cùng đối phương.",
+    "send_otp": "Gửi mã đăng ký",
+    "otp_hint": "Nhập mã xác thực",
+    "verify_otp": "Xác nhận & Đăng ký",
+    "otp_sent_to": "Mã xác thực đăng ký đã được gửi đến {email}",
+    "back_to_email": "Thay đổi email",
+    "already_have_account": "Đã có tài khoản? Đăng nhập",
+    "dont_have_account": "Chưa có tài khoản? Đăng ký",
+    "invalid_otp": "Vui lòng nhập mã xác thực hợp lệ",
+    "error_invalid_otp": "Mã xác thực không chính xác hoặc đã hết hạn. Vui lòng thử lại!",
+    "sign_up_apple": "Đăng ký với Apple"
+  },
+  "profile_setup": {
+    "title": "Thiết lập hồ sơ",
+    "subtitle": "Hãy hoàn tất thông tin ban đầu để cá nhân hóa trải nghiệm của hai bạn.",
+    "nickname": "Biệt danh của bạn",
+    "nickname_hint": "Nhập biệt danh (ví dụ: Bé Heo, Cún cưng...)",
+    "nickname_required": "Vui lòng nhập biệt danh",
+    "dob": "Ngày sinh của bạn",
+    "dob_hint": "Chọn ngày sinh",
+    "dob_required": "Vui lòng chọn ngày sinh",
+    "gender": "Giới tính",
+    "gender_male": "Nam",
+    "gender_female": "Nữ",
+    "gender_required": "Vui lòng chọn giới tính",
+    "relationship": "Trạng thái mối quan hệ",
+    "relationship_dating": "Đang yêu",
+    "relationship_married": "Đã kết hôn",
+    "relationship_required": "Vui lòng chọn trạng thái mối quan hệ",
+    "submit": "Bắt đầu trải nghiệm",
+    "saving": "Đang lưu thông tin..."
+  },
+  "widget": {
+    "title": "Widget Cặp Đôi",
+    "quick_mood": "Cập nhật nhanh Mood",
+    "action_accept": "Nhận",
+    "action_complete": "Xong",
+    "action_done": "Hoàn thành",
+    "status_updated": "Đã cập nhật trạng thái!"
   }
 }

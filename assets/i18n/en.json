@@ -4,9 +4,20 @@
   "login": {
     "welcome": "Welcome to Emora",
     "desc": "Connect and understand your partner through simple silent interactions.",
-    "sign_in_google": "Sign in with Google",
     "sign_in_apple": "Sign in with Apple",
-    "error_failed": "Login failed. Please try again!"
+    "error_failed": "Login failed. Please try again!",
+    "email_hint": "Enter your email address",
+    "send_otp": "Send Login Code",
+    "otp_hint": "Enter verification code",
+    "verify_otp": "Verify & Login",
+    "otp_sent_to": "Verification code has been sent to {email}",
+    "back_to_email": "Change email",
+    "resend_otp": "Resend code",
+    "resend_wait": "Resend in {seconds}s",
+    "invalid_email": "Invalid email address",
+    "invalid_otp": "Please enter a valid verification code",
+    "error_invalid_otp": "Incorrect or expired verification code. Please try again!",
+    "error_user_not_found": "Account does not exist. Please sign up first."
   },
   "pairing": {
     "title": "Pair Your Device",
@@ -21,7 +32,17 @@
     "or_scan_qr": "Or scan QR code",
     "error_invalid_code": "Invalid or expired pairing code!",
     "error_self_code": "You cannot connect with your own code!",
-    "success_connected": "Connected successfully!"
+    "success_connected": "Connected successfully!",
+    "female_onboarding_title": "Couple Connection",
+    "female_onboarding_desc": "Connect with your boyfriend/husband to unlock all Emora features. Enter your partner's Pair Code to link. You can also do this later in Settings.",
+    "pair_now": "Pair Now",
+    "later": "Later",
+    "male_lock_title": "Waiting for Connection",
+    "male_lock_desc": "The app will unlock once you are paired with your partner.",
+    "male_lock_guide": "Please send this pairing code to your female partner to establish the connection.",
+    "copy_code": "Copy Code",
+    "share_code": "Share Code",
+    "logout": "Log Out"
   },
   "common": {
     "error_network": "Network connection error. Please try again!",
@@ -101,6 +122,38 @@
     "pop_balloon": "❤️ You popped the balloon!",
     "balloon_message": "Sending love!"
   },
+  "premium": {
+    "title": "Emora Premium",
+    "desc": "Unlock wonderful experiences with your partner",
+    "features_theme": "Collection of 4 Unique Themes & Dynamic Backgrounds",
+    "features_vent": "Unlimited venting actions in Playful Room",
+    "features_ads": "Ad-free & uninterrupted experience",
+    "upgrade_btn": "Upgrade Test (Free)",
+    "trial_desc": "Simulated payment for testing premium features",
+    "success_title": "Upgrade Successful",
+    "success_desc": "Congratulations! You have unlocked all Premium features.",
+    "close": "Close",
+    "processing": "Processing transaction...",
+    "limit_reached_title": "Daily Limit Reached",
+    "limit_reached_desc": "You have used all 5 free playful actions for today. Upgrade to Premium to continue!",
+    "upgrade_now": "Upgrade Now"
+  },
+  "profile": {
+    "setup_title": "Role & Call Sign Configuration",
+    "bio_role": "Your Role",
+    "bio_role_female": "Female (Track Period)",
+    "bio_role_male": "Male (View Period Summary)",
+    "bio_role_other": "Other / Unspecified",
+    "call_sign": "Your Call Sign",
+    "call_sign_hint": "What your partner calls you (e.g., Honey, Sweetheart)",
+    "partner_call_sign": "Partner's Call Sign",
+    "partner_call_sign_hint": "What you call your partner (e.g., Baby, Love)",
+    "success_save": "Couple profile updated successfully!",
+    "cycle_locked_msg": "Cycle tracking is only available for Female role.",
+    "relationship_status": "Relationship Status",
+    "status_dating": "Dating",
+    "status_married": "Married"
+  },
   "baby": {
     "title": "Baby Hub",
     "setup_title": "Create Baby Profile",
@@ -128,22 +181,70 @@
     "status": "Status",
     "notes_placeholder": "Enter notes (fever temperature, clinic...)",
     "not_set": "Not updated",
-    "success_save": "Successfully saved baby info!"
+    "success_save": "Successfully saved baby info!",
+    "locked_title": "Feature Locked",
+    "locked_desc": "The Baby Hub feature is only available for married couples. Please update your relationship status in Settings to unlock."
   },
-  "premium": {
-    "title": "Emora Premium",
-    "desc": "Unlock wonderful experiences with your partner",
-    "features_theme": "Collection of 4 Unique Themes & Dynamic Backgrounds",
-    "features_vent": "Unlimited venting actions in Playful Room",
-    "features_ads": "Ad-free & uninterrupted experience",
-    "upgrade_btn": "Upgrade Test (Free)",
-    "trial_desc": "Simulated payment for testing premium features",
-    "success_title": "Upgrade Successful",
-    "success_desc": "Congratulations! You have unlocked all Premium features.",
-    "close": "Close",
-    "processing": "Processing transaction...",
-    "limit_reached_title": "Daily Limit Reached",
-    "limit_reached_desc": "You have used all 5 free playful actions for today. Upgrade to Premium to continue!",
-    "upgrade_now": "Upgrade Now"
+  "empathy": {
+    "title": "Empathy Hints",
+    "pms_hint": "{partner} is approaching their period (sensitive phase). Consider doing chores or making a warm ginger tea! ☕❤️",
+    "period_hint": "{partner} is on their period. Show care and prepare some warm water! 🌸",
+    "tired_hint": "{partner} is feeling tired. Give them a warm hug or help with chores! 🤗",
+    "irritated_hint": "{partner} is irritated. Be patient, avoid arguments, and send sweet messages! 💕",
+    "sad_hint": "{partner} is sad. Listen to them and surprise them with delicious food! 🍜",
+    "default_hint": "Double-tap the bubble to send a sweet nudge to {partner} today!"
+  },
+  "onboarding": {
+    "title_1": "Share Emotions",
+    "desc_1": "Express emotions and send silent nudges of love to your partner without words.",
+    "title_2": "Health Companion",
+    "desc_2": "Track your partner's cycles and fertile windows to understand and support them better.",
+    "title_3": "Sweet Connection",
+    "desc_3": "Send instant care requests, play mini interactions, and save special moments together.",
+    "btn_continue": "Continue",
+    "btn_start": "Get Started",
+    "btn_skip": "Skip"
+  },
+  "signup": {
+    "welcome": "Create your Emora account",
+    "desc": "Create an account to start connecting with your partner.",
+    "send_otp": "Send Registration Code",
+    "otp_hint": "Enter verification code",
+    "verify_otp": "Verify & Sign Up",
+    "otp_sent_to": "Registration code has been sent to {email}",
+    "back_to_email": "Change email",
+    "already_have_account": "Already have an account? Log in",
+    "dont_have_account": "Don't have an account? Sign up",
+    "invalid_otp": "Please enter a valid verification code",
+    "error_invalid_otp": "Incorrect or expired verification code. Please try again!",
+    "sign_up_apple": "Sign up with Apple"
+  },
+  "profile_setup": {
+    "title": "Setup Profile",
+    "subtitle": "Complete your initial information to personalize your couple experience.",
+    "nickname": "Your Nickname",
+    "nickname_hint": "Enter nickname (e.g. Honey, Sweetie...)",
+    "nickname_required": "Nickname is required",
+    "dob": "Your Date of Birth",
+    "dob_hint": "Select birth date",
+    "dob_required": "Birth date is required",
+    "gender": "Biological Gender",
+    "gender_male": "Male",
+    "gender_female": "Female",
+    "gender_required": "Biological gender is required",
+    "relationship": "Relationship Status",
+    "relationship_dating": "Dating",
+    "relationship_married": "Married",
+    "relationship_required": "Relationship status is required",
+    "submit": "Get Started",
+    "saving": "Saving profile..."
+  },
+  "widget": {
+    "title": "Couple Widget",
+    "quick_mood": "Quick Mood Update",
+    "action_accept": "Accept",
+    "action_complete": "Complete",
+    "action_done": "Done",
+    "status_updated": "Status updated successfully!"
   }
 }

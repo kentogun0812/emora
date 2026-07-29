@@ -6,6 +6,8 @@ import '../../../core/constants/routes.dart';
 import '../../../core/utils/localization.dart';
 import '../../baby/bloc/baby_bloc.dart';
 import '../../baby/bloc/baby_state.dart';
+import '../bloc/dashboard_bloc.dart';
+import '../bloc/dashboard_state.dart';
 
 class BabyHubCard extends StatelessWidget {
   const BabyHubCard({super.key});
@@ -37,77 +39,326 @@ class BabyHubCard extends StatelessWidget {
     return parts.join(' ');
   }
 
+  void _showLockedDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+          title: Row(
+            children: [
+              const Text('🔒 '),
+              Text(context.translate('baby.locked_title')),
+            ],
+          ),
+          content: Text(context.translate('baby.locked_desc')),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Đồng ý', style: TextStyle(fontWeight: FontWeight.bold)),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BabyBloc, BabyState>(
-      builder: (context, state) {
-        if (state is BabyLoading || state is BabyInitial) {
+    return BlocBuilder<DashboardBloc, DashboardState>(
+      builder: (context, dashboardState) {
+        final isMarried = dashboardState is DashboardLoaded && dashboardState.relationshipStatus == 'Married';
+
+        if (!isMarried) {
           return Container(
-            height: 120,
             decoration: BoxDecoration(
-              color: EmoraColors.surface,
+              color: EmoraColors.surface.withOpacity(0.7),
               borderRadius: BorderRadius.circular(28),
+              boxShadow: [
+                BoxShadow(
+                  color: EmoraColors.primary.withOpacity(0.04),
+                  blurRadius: 16,
+                  offset: const Offset(0, 6),
+                ),
+              ],
             ),
-            child: const Center(
-              child: CircularProgressIndicator(color: EmoraColors.primary),
+            child: InkWell(
+              onTap: () => _showLockedDialog(context),
+              borderRadius: BorderRadius.circular(28),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.withOpacity(0.2),
+                        shape: BoxShape.circle,
+                      ),
+                      alignment: Alignment.center,
+                      child: const Text('🔒', style: TextStyle(fontSize: 24)),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            context.translate('baby.title'),
+                            style: const TextStyle(
+                              fontFamily: 'Outfit',
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            context.translate('baby.locked_desc'),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           );
         }
 
-        if (state is BabyFailure) {
-          return const SizedBox.shrink();
-        }
+        return BlocBuilder<BabyBloc, BabyState>(
+          builder: (context, state) {
+            if (state is BabyLoading || state is BabyInitial) {
+              return Container(
+                height: 120,
+                decoration: BoxDecoration(
+                  color: EmoraColors.surface,
+                  borderRadius: BorderRadius.circular(28),
+                ),
+                child: const Center(
+                  child: CircularProgressIndicator(color: EmoraColors.primary),
+                ),
+              );
+            }
 
-        if (state is BabyLoaded) {
-          final baby = state.babyProfile;
-          if (baby == null) {
-            // Render Setup Profile Call-to-action
-            return Container(
-              padding: const EdgeInsets.all(20.0),
-              decoration: BoxDecoration(
-                color: EmoraColors.surface,
-                borderRadius: BorderRadius.circular(28),
-                boxShadow: [
-                  BoxShadow(
-                    color: EmoraColors.primary.withOpacity(0.04),
-                    blurRadius: 16,
-                    offset: const Offset(0, 6),
+            if (state is BabyFailure) {
+              return const SizedBox.shrink();
+            }
+
+            if (state is BabyLoaded) {
+              final baby = state.babyProfile;
+              if (baby == null) {
+                // Render Setup Profile Call-to-action
+                return Container(
+                  padding: const EdgeInsets.all(20.0),
+                  decoration: BoxDecoration(
+                    color: EmoraColors.surface,
+                    borderRadius: BorderRadius.circular(28),
+                    boxShadow: [
+                      BoxShadow(
+                        color: EmoraColors.primary.withOpacity(0.04),
+                        blurRadius: 16,
+                        offset: const Offset(0, 6),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Row(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: EmoraColors.secondary.withOpacity(0.2),
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Text('👶', style: TextStyle(fontSize: 28)),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  context.translate('baby.title'),
+                                  style: const TextStyle(
+                                    fontFamily: 'Outfit',
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: EmoraColors.textDark,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  context.translate('baby.no_baby_desc'),
+                                  style: const TextStyle(
+                                    fontSize: 13,
+                                    color: EmoraColors.textMuted,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: EmoraColors.primary,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          elevation: 0,
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, EmoraRoutes.babySetup);
+                        },
+                        icon: const Icon(Icons.add, size: 18),
+                        label: Text(
+                          context.translate('baby.create_profile'),
+                          style: const TextStyle(
+                            fontFamily: 'Outfit',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+
+              // Baby Profile details & vaccine stats
+              final ageString = _calculateAgeString(baby.dob);
+              final totalVaccines = state.vaccinations.length;
+              final doneVaccines = state.vaccinations.where((v) => v.status == 'Done').length;
+              final overdueVaccines = state.vaccinations
+                  .where((v) => v.status == 'Pending' && v.plannedDate.isBefore(DateTime.now()))
+                  .length;
+
+              final progressValue = totalVaccines > 0 ? doneVaccines / totalVaccines : 0.0;
+
+              return InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, EmoraRoutes.vaccineTracker);
+                },
+                borderRadius: BorderRadius.circular(28),
+                child: Container(
+                  padding: const EdgeInsets.all(20.0),
+                  decoration: BoxDecoration(
+                    color: EmoraColors.surface,
+                    borderRadius: BorderRadius.circular(28),
+                    border: Border.all(
+                      color: EmoraColors.secondary.withOpacity(0.3),
+                      width: 1.5,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: EmoraColors.primary.withOpacity(0.04),
+                        blurRadius: 16,
+                        offset: const Offset(0, 6),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      // Avatar Bubble
                       Container(
-                        padding: const EdgeInsets.all(12),
+                        width: 60,
+                        height: 60,
                         decoration: BoxDecoration(
                           color: EmoraColors.secondary.withOpacity(0.2),
                           shape: BoxShape.circle,
                         ),
-                        child: const Text('👶', style: TextStyle(fontSize: 28)),
+                        alignment: Alignment.center,
+                        child: Text(
+                          baby.emoji,
+                          style: const TextStyle(fontSize: 34),
+                        ),
                       ),
                       const SizedBox(width: 16),
+                      // Details Column
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              context.translate('baby.title'),
-                              style: const TextStyle(
-                                fontFamily: 'Outfit',
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: EmoraColors.textDark,
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  baby.name,
+                                  style: const TextStyle(
+                                    fontFamily: 'Outfit',
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    color: EmoraColors.textDark,
+                                  ),
+                                ),
+                                const Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 14,
+                                  color: EmoraColors.textMuted,
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: 4),
+                            const SizedBox(height: 2),
                             Text(
-                              context.translate('baby.no_baby_desc'),
+                              ageString,
                               style: const TextStyle(
                                 fontSize: 13,
                                 color: EmoraColors.textMuted,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            // Vaccine progress summary
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Tiêm chủng: $doneVaccines/$totalVaccines mũi',
+                                  style: const TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.bold,
+                                    color: EmoraColors.textDark,
+                                  ),
+                                ),
+                                if (overdueVaccines > 0)
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                    decoration: BoxDecoration(
+                                      color: Colors.red.withOpacity(0.1),
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: Text(
+                                      '⚠️ $overdueVaccines trễ lịch',
+                                      style: const TextStyle(
+                                        fontSize: 10,
+                                        color: Colors.red,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            const SizedBox(height: 6),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(4),
+                              child: LinearProgressIndicator(
+                                value: progressValue,
+                                backgroundColor: EmoraColors.background,
+                                valueColor: const AlwaysStoppedAnimation<Color>(
+                                  EmoraColors.primary,
+                                ),
+                                minHeight: 6,
                               ),
                             ),
                           ],
@@ -115,170 +366,13 @@ class BabyHubCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16),
-                  ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: EmoraColors.primary,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      elevation: 0,
-                    ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, EmoraRoutes.babySetup);
-                    },
-                    icon: const Icon(Icons.add, size: 18),
-                    label: Text(
-                      context.translate('baby.create_profile'),
-                      style: const TextStyle(
-                        fontFamily: 'Outfit',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            );
-          }
-
-          // Baby Profile details & vaccine stats
-          final ageString = _calculateAgeString(baby.dob);
-          final totalVaccines = state.vaccinations.length;
-          final doneVaccines = state.vaccinations.where((v) => v.status == 'Done').length;
-          final overdueVaccines = state.vaccinations
-              .where((v) => v.status == 'Pending' && v.plannedDate.isBefore(DateTime.now()))
-              .length;
-
-          final progressValue = totalVaccines > 0 ? doneVaccines / totalVaccines : 0.0;
-
-          return InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, EmoraRoutes.vaccineTracker);
-            },
-            borderRadius: BorderRadius.circular(28),
-            child: Container(
-              padding: const EdgeInsets.all(20.0),
-              decoration: BoxDecoration(
-                color: EmoraColors.surface,
-                borderRadius: BorderRadius.circular(28),
-                border: Border.all(
-                  color: EmoraColors.secondary.withOpacity(0.3),
-                  width: 1.5,
                 ),
-                boxShadow: [
-                  BoxShadow(
-                    color: EmoraColors.primary.withOpacity(0.04),
-                    blurRadius: 16,
-                    offset: const Offset(0, 6),
-                  ),
-                ],
-              ),
-              child: Row(
-                children: [
-                  // Avatar Bubble
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: EmoraColors.secondary.withOpacity(0.2),
-                      shape: BoxShape.circle,
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      baby.emoji,
-                      style: const TextStyle(fontSize: 34),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  // Details Column
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              baby.name,
-                              style: const TextStyle(
-                                fontFamily: 'Outfit',
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: EmoraColors.textDark,
-                              ),
-                            ),
-                            const Icon(
-                              Icons.arrow_forward_ios,
-                              size: 14,
-                              color: EmoraColors.textMuted,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 2),
-                        Text(
-                          ageString,
-                          style: const TextStyle(
-                            fontSize: 13,
-                            color: EmoraColors.textMuted,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        // Vaccine progress summary
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              'Tiêm chủng: $doneVaccines/$totalVaccines mũi',
-                              style: const TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.bold,
-                                color: EmoraColors.textDark,
-                              ),
-                            ),
-                            if (overdueVaccines > 0)
-                              Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                                decoration: BoxDecoration(
-                                  color: Colors.red.withOpacity(0.1),
-                                  borderRadius: BorderRadius.circular(6),
-                                ),
-                                child: Text(
-                                  '⚠️ $overdueVaccines trễ lịch',
-                                  style: const TextStyle(
-                                    fontSize: 10,
-                                    color: Colors.red,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                          ],
-                        ),
-                        const SizedBox(height: 6),
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
-                          child: LinearProgressIndicator(
-                            value: progressValue,
-                            backgroundColor: EmoraColors.background,
-                            valueColor: const AlwaysStoppedAnimation<Color>(
-                              EmoraColors.primary,
-                            ),
-                            minHeight: 6,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        }
+              );
+            }
 
-        return const SizedBox.shrink();
+            return const SizedBox.shrink();
+          },
+        );
       },
     );
   }

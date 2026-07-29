@@ -9,4 +9,7 @@ class EmoraRoutes {
   static const String babySetup = '/baby-setup';
   static const String vaccineTracker = '/vaccine-tracker';
   static const String premiumPaywall = '/premium-paywall';
+  static const String onboarding = '/onboarding';
+  static const String signup = '/signup';
+  static const String profileSetup = '/profile-setup';
 }
